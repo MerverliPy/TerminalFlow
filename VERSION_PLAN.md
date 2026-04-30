@@ -428,12 +428,12 @@ Current status:
 - Database locked for v0.1: SQLite
 - Install method locked for v0.1: Docker Compose
 - Host target locked for v0.1: Linux PC/server
-- Implementation status: not started
-- Current phase: planning documentation
+- Implementation status: not started unless explicitly approved by the user
+- Current phase: documentation baseline normalized
 
 ## 14. Next Step After This File
 
-After this version plan is accepted, the next step is to create the initial repository structure.
+After this version plan is accepted and the user explicitly approves implementation, the next step is to create the initial repository structure.
 
 The first implementation task should be limited to the v0.1 foundation:
 
