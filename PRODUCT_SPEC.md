@@ -301,16 +301,18 @@ Current status:
 
 - Product concept defined
 - Repository name locked as TerminalFlow
-- v0.1 stack locked as Next.js + FastAPI
+- Product name locked as TerminalFlow
+- v0.1 stack locked as Next.js + FastAPI + SQLite + Docker Compose
+- Documentation baseline normalized
 - Implementation not started
-- Planning documentation in progress
 
 ## 14. Implementation Gate
 
-No implementation should begin until the following planning files are complete:
+No implementation should begin until the user explicitly approves moving from documentation into repository or code creation. The official planning baseline consists of:
 
 - PRODUCT_SPEC.md
 - ROADMAP.md
 - VERSION_PLAN.md
+- V0_1_IMPLEMENTATION_PLAN.md
 
-After these files are complete, the next step is creating the repository structure for v0.1.
+After these files are accepted, the next possible step is creating the repository structure for v0.1. That step is still implementation-adjacent and requires explicit user approval.
