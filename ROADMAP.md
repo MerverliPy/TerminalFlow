@@ -309,6 +309,7 @@ Future versions may include:
 Current locked decisions:
 
 - Repository name: TerminalFlow
+- Product name: TerminalFlow
 - Frontend: Next.js
 - Backend: FastAPI
 - Database: SQLite
@@ -319,4 +320,5 @@ Current locked decisions:
 Implementation status:
 
 - Not started
-- Documentation phase only
+- Documentation baseline normalized
+- No implementation authorized yet
