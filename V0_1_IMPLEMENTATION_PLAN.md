@@ -87,3 +87,12 @@ TerminalFlow/
 ├── VERSION_PLAN.md
 ├── V0_1_IMPLEMENTATION_PLAN.md
 └── memory.md
+```
+
+---
+
+## 6. Implementation Gate
+
+This file is a planning document only. It does not authorize implementation by itself.
+
+Implementation should remain closed until the user explicitly approves moving from documentation into repository/code creation.
