@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 01: Bootstrap a runnable shell and routing foundation.
+Phase 02: Navigation, domain model, and static workspace surfaces.
 
 ## Hard constraints
 
