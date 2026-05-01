@@ -6,11 +6,11 @@ export default function WorkflowsPage() {
     <main className="shell__panel">
       <section className="surface-heading">
         <span className="surface-heading__eyebrow">Workflows</span>
-        <h1 className="surface-heading__title">Workflow cards</h1>
+        <h1 className="surface-heading__title">Workflow cards and run history</h1>
         <p className="surface-heading__copy">
           Workflows are only represented as static product vocabulary here.
-          They show how repeatable actions can be organized before any runner or
-          automation layer exists.
+          Open a workflow to inspect its mock run history and execution log
+          surfaces without any active runner.
         </p>
       </section>
 

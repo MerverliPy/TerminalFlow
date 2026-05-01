@@ -501,6 +501,109 @@ a {
   gap: 0.9rem;
 }
 
+.workflow-card__title {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.workflow-card__links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.workflow-card__link {
+  color: var(--accent);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.workflow-builder__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.run-shell {
+  gap: 1rem;
+}
+
+.run-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.run-main-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.run-meta-grid,
+.run-step-panel__grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.run-timeline,
+.run-log-viewer,
+.workflow-step-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.run-timeline__item,
+.run-log-viewer__entry,
+.run-step-panel {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.run-timeline__top,
+.run-log-viewer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.run-log-viewer__message {
+  display: block;
+  margin-top: 0.25rem;
+  font-family:
+    ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.run-log-viewer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.run-log-viewer__stream {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 0.32rem 0.55rem;
+  background: rgba(5, 8, 22, 0.72);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.run-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .nav-spacer {
   height: var(--dock-height);
 }
@@ -600,5 +703,19 @@ a {
   .composer__actions {
     grid-template-columns: auto auto;
     justify-content: start;
+  }
+
+  .run-main-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+
+  .run-meta-grid,
+  .run-step-panel__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .run-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }

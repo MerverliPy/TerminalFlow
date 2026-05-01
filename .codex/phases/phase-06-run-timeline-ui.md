@@ -1,6 +1,6 @@
 # Phase 06 — Static Execution Log and Run Timeline UI
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -136,4 +136,14 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented a static workflow run history and run detail experience with typed local run data, ordered timeline events, static execution log entries, per-step timing panels, disabled run actions, and static-run safety copy.
+
+Validation evidence:
+
+- `npm run typecheck` ✅
+- Browser QA via `google-chrome --headless=new` screenshots of:
+  - `/workflows/workflow-check`
+  - `/workflows/workflow-check/runs`
+  - `/workflows/workflow-check/runs/run-preflight-001`
+  - desktop and mobile viewport sizes
+- `view_image` review of the latest workflow detail, run history, and run detail screenshots
