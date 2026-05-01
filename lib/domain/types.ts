@@ -67,40 +67,33 @@ export interface IntegrationActivityEvent {
   detail: string;
 }
 
-export interface IntegrationActionPreview {
+export interface NotificationPreferencePreview {
   id: string;
-  kind: IntegrationActionKind;
   label: string;
-  detail: string;
-  mode: IntegrationActionMode;
+  summary: string;
+  enabled: boolean;
+  note: string;
 }
 
-export interface IntegrationConnection {
+export interface Notification {
   id: string;
-  providerId: string;
-  workspaceId: string;
-  status: IntegrationConnectionStatus;
-  lastCheckedAt: string;
-  lastActivityAt: string;
-  scopeIds: string[];
-  findingIds: string[];
-  activityEventIds: string[];
-  actionPreviewIds: string[];
-  riskNote: string;
-}
-
-export interface IntegrationProvider {
-  id: string;
-  name: string;
   categoryId: string;
+  title: string;
   summary: string;
   detail: string;
-  connectionId: string;
-  riskLevel: IntegrationRiskLevel;
-  scopeIds: string[];
-  workspaceNote: string;
-  connectionSummary: string;
-  reviewSummary: string;
+  severity: NotificationSeverity;
+  status: NotificationStatus;
+  source: NotificationSource;
+  sourceLabel: string;
+  linkedProviderId?: string;
+  linkedConnectionId?: string;
+  linkedProviderLabel?: string;
+  linkedConnectionLabel?: string;
+  createdAt: string;
+  updatedAt: string;
+  activityEventIds: string[];
+  alertReviewItemIds: string[];
+  preferencePreviewIds: string[];
 }
 
 export type ConnectionState = HostStatus;

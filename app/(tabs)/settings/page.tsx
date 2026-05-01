@@ -2,9 +2,11 @@ import Link from "next/link";
 
 import { AccountPanel } from "@/components/settings/account-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
+import { NotificationPreferencesPanel } from "@/components/settings/notification-preferences-panel";
 import { WorkspaceBoundaryPanel } from "@/components/settings/workspace-boundary-panel";
 import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel";
 import { StorageStatusPanel } from "@/components/settings/storage-status-panel";
+import { MOCK_NOTIFICATION_PREFERENCE_PREVIEWS } from "@/lib/domain/mock-data";
 import { ROUTES } from "@/lib/navigation/routes";
 
 const SETTINGS_GROUPS = [
@@ -73,10 +75,12 @@ export default function SettingsPage() {
         <Link className="settings-link" href={ROUTES.settingsSecrets}>
           Open Secrets Vault
         </Link>
-        <Link className="settings-link" href={ROUTES.settingsIntegrations}>
-          Open Integrations Catalog
+        <Link className="settings-link" href={ROUTES.notifications}>
+          Open Notifications
         </Link>
       </section>
+
+      <NotificationPreferencesPanel preferences={MOCK_NOTIFICATION_PREFERENCE_PREVIEWS} />
     </main>
   );
 }

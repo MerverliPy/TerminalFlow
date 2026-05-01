@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 12: Integration provider catalog and connection review UI.
+Phase 13: Local notification center and alert review UI.
 
 ## Hard constraints
 
