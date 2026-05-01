@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 13: Local notification center and alert review UI.
+Phase 14: Project health dashboard and readiness review UI.
 
 ## Hard constraints
 

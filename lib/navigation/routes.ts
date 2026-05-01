@@ -3,6 +3,7 @@ export const ROUTES = {
   signIn: "/sign-in",
   workspace: "/workspace",
   hub: "/hub",
+  health: "/health",
   projects: "/projects",
   sessions: "/sessions",
   hosts: "/hosts",
@@ -18,6 +19,7 @@ export const DEFAULT_ROUTE = ROUTES.hub;
 
 export const TAB_ROUTES = [
   ROUTES.hub,
+  ROUTES.health,
   ROUTES.projects,
   ROUTES.sessions,
   ROUTES.hosts,
@@ -28,6 +30,7 @@ export const TAB_ROUTES = [
 
 export const TAB_NAV_ITEMS = [
   { label: "Hub", href: ROUTES.hub },
+  { label: "Health", href: ROUTES.health },
   { label: "Projects", href: ROUTES.projects },
   { label: "Sessions", href: ROUTES.sessions },
   { label: "Hosts", href: ROUTES.hosts },
