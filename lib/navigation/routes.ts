@@ -9,6 +9,7 @@ export const ROUTES = {
   workflows: "/workflows",
   settings: "/settings",
   settingsPermissions: "/settings/permissions",
+  settingsSecrets: "/settings/secrets",
 } as const;
 
 export const DEFAULT_ROUTE = ROUTES.hub;
