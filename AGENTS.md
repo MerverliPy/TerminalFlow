@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 11: Secrets vault UI and credential safety boundary.
+Phase 12: Integration provider catalog and connection review UI.
 
 ## Hard constraints
 
