@@ -75,7 +75,7 @@ export default function HubPage() {
           <div className="workspace-rail">
             <span className="section-note">Queued workflow</span>
             <span className="workspace-pill workspace-pill--warn">
-              {MOCK_WORKFLOWS[1]?.name} · {MOCK_WORKFLOWS[1]?.state}
+              {MOCK_WORKFLOWS[1]?.name} · {MOCK_WORKFLOWS[1]?.trigger.label}
             </span>
           </div>
         </div>

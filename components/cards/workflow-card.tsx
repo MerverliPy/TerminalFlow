@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import type { Workflow } from "@/lib/domain/types";
+import { workflowDetailRoute, workflowPreviewRoute } from "@/lib/navigation/routes";
 
 const WORKFLOW_LABELS: Record<Workflow["state"], string> = {
   ready: "Ready",
@@ -12,7 +15,9 @@ export function WorkflowCard({ workflow }: { workflow: Workflow }) {
       <div className="card__top">
         <div className="card-kv">
           <span className="card-kv__label">Workflow</span>
-          <span className="card-title">{workflow.name}</span>
+          <Link className="card-title workflow-card__title" href={workflowDetailRoute(workflow.id)}>
+            {workflow.name}
+          </Link>
         </div>
         <span
           className={`workspace-pill ${
@@ -28,23 +33,33 @@ export function WorkflowCard({ workflow }: { workflow: Workflow }) {
       </div>
 
       <div className="card__body">
+        <p className="card-copy">{workflow.description}</p>
         <div className="card-kv">
           <span className="card-kv__label">Trigger</span>
-          <span className="card-kv__value">{workflow.trigger}</span>
+          <span className="card-kv__value">{workflow.trigger.label}</span>
+        </div>
+        <div className="card-kv">
+          <span className="card-kv__label">Target</span>
+          <span className="card-kv__value">
+            {workflow.target.projectName} on {workflow.target.hostName}
+          </span>
         </div>
         <div className="card-kv">
           <span className="card-kv__label">Steps</span>
-          <ul className="card-list">
-            {workflow.steps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ul>
+          <span className="card-kv__value">{workflow.steps.length} step plan</span>
         </div>
       </div>
 
       <div className="card__footer">
         <span className="card-meta">Last run {workflow.lastRunAt}</span>
-        <span className="workspace-pill">Project: {workflow.projectId}</span>
+        <div className="workflow-card__links">
+          <Link className="workflow-card__link" href={workflowDetailRoute(workflow.id)}>
+            Open builder
+          </Link>
+          <Link className="workflow-card__link" href={workflowPreviewRoute(workflow.id)}>
+            Preview run
+          </Link>
+        </div>
       </div>
     </article>
   );

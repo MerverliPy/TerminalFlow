@@ -1,6 +1,6 @@
 # Phase 05 — Static Workflow Builder and Run Preview UI
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -136,4 +136,9 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented a static workflow builder and run preview surface with typed workflow triggers, targets, steps, safety checks, and disabled actions. The Workflows list now links into static builder/detail/preview routes backed only by local mock data.
+
+Validation evidence:
+
+- `npm run typecheck` ✅
+- Browser QA via `google-chrome --headless=new` screenshots of `/workflows/new` at desktop and mobile viewport sizes, reviewed with `view_image`

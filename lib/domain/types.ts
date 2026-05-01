@@ -7,6 +7,11 @@ export type HostEnvironment = "local" | "lab" | "remote";
 export type ConnectionMethod = "local profile" | "saved preset" | "manual setup";
 export type HostSafetyCheckState = "pass" | "warn" | "blocked";
 export type WorkflowState = "ready" | "draft" | "blocked";
+export type WorkflowStepKind = "command" | "check" | "decision" | "handoff" | "note";
+export type WorkflowRunStatus = "ready" | "blocked" | "preview" | "inactive";
+export type WorkflowStepStatus = "pending" | "ready" | "running" | "blocked" | "done";
+export type WorkflowTriggerKind = "manual" | "schedule" | "event";
+export type WorkflowTargetMode = "project" | "host" | "workspace";
 
 export type ConnectionState = HostStatus;
 
@@ -69,9 +74,58 @@ export interface CommandEntry {
 export interface Workflow {
   id: string;
   name: string;
+  description: string;
   projectId: string;
-  trigger: string;
+  trigger: WorkflowTrigger;
+  target: WorkflowTarget;
   state: WorkflowState;
-  steps: string[];
+  steps: WorkflowStep[];
   lastRunAt: string;
+  runPreview: WorkflowRunPreview;
+  safetyChecks: WorkflowSafetyCheck[];
+}
+
+export interface WorkflowTrigger {
+  id: string;
+  kind: WorkflowTriggerKind;
+  label: string;
+  detail: string;
+  schedule?: string;
+}
+
+export interface WorkflowTarget {
+  id: string;
+  mode: WorkflowTargetMode;
+  projectId: string;
+  hostId: string;
+  projectName: string;
+  hostName: string;
+  workspaceRoot: string;
+  detail: string;
+}
+
+export interface WorkflowStep {
+  id: string;
+  kind: WorkflowStepKind;
+  title: string;
+  detail: string;
+  commandPreview?: string;
+  status: WorkflowStepStatus;
+}
+
+export interface WorkflowSafetyCheck {
+  id: string;
+  label: string;
+  state: HostSafetyCheckState;
+  detail: string;
+}
+
+export interface WorkflowRunPreview {
+  id: string;
+  status: WorkflowRunStatus;
+  summary: string;
+  expectedOutcome: string;
+  nextRun: string;
+  steps: WorkflowStep[];
+  checks: WorkflowSafetyCheck[];
 }

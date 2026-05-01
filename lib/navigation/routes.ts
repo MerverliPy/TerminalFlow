@@ -36,3 +36,14 @@ export const sessionDetailRoute = (sessionId: string) =>
 export const HOST_DETAIL_ROUTE = "/hosts/[hostId]";
 
 export const hostDetailRoute = (hostId: string) => `${ROUTES.hosts}/${hostId}`;
+
+export const WORKFLOW_DETAIL_ROUTE = "/workflows/[workflowId]";
+export const WORKFLOW_PREVIEW_ROUTE = "/workflows/[workflowId]/preview";
+
+export const workflowDetailRoute = (workflowId: string) =>
+  `${ROUTES.workflows}/${workflowId}`;
+
+export const workflowPreviewRoute = (workflowId: string) =>
+  `${workflowDetailRoute(workflowId)}/preview`;
+
+export const workflowNewRoute = () => `${ROUTES.workflows}/new`;
