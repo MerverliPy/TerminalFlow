@@ -1,7 +1,9 @@
 import type {
   CommandEntry,
+  CommandSimulationSafetyCheck,
   HostConnection,
   Project,
+  SimulatedCommandPreset,
   TerminalSession,
   WorkflowRun,
   Workflow,
@@ -235,6 +237,90 @@ export const MOCK_COMMAND_ENTRIES: CommandEntry[] = [
     timestamp: "2 hours ago",
     cwd: "/srv/workspaces/edge-notes",
     output: "Blocked on host connection; not executed here.",
+  },
+];
+
+const allowlistedSafetyCheck: CommandSimulationSafetyCheck = {
+  id: "sim-safety-allowlisted",
+  label: "Allowlisted mock command",
+  state: "allowlisted",
+  detail: "This command is handled by local static simulation only.",
+};
+
+const warningSafetyCheck: CommandSimulationSafetyCheck = {
+  id: "sim-safety-warning",
+  label: "Local simulation warning",
+  state: "warning",
+  detail: "The command is safe to preview, but the simulator is returning a cautionary mock state.",
+};
+
+const blockedSafetyCheck: CommandSimulationSafetyCheck = {
+  id: "sim-safety-blocked",
+  label: "Blocked by phase guard",
+  state: "blocked",
+  detail: "Host, shell, and workflow execution are intentionally out of scope for this phase.",
+};
+
+export const MOCK_SIMULATED_COMMAND_PRESETS: SimulatedCommandPreset[] = [
+  {
+    id: "preset-typecheck",
+    label: "Type-check workspace",
+    command: "npm run typecheck",
+    description: "Allowed mock command that returns a clean local result.",
+    status: "completed",
+    summary: "The simulator reports a clean type-check with no shell execution.",
+    exitCode: 0,
+    duration: "1.4s",
+    output: {
+      stdout: ["> terminalflow@0.2.0 typecheck", "> tsc --noEmit", "No type errors found."],
+      stderr: [],
+    },
+    safetyCheck: allowlistedSafetyCheck,
+  },
+  {
+    id: "preset-status",
+    label: "Inspect workspace status",
+    command: "git status --short",
+    description: "Local preview command that surfaces a cautionary mock state.",
+    status: "warning",
+    summary: "The simulator shows a warning-style status check with local-only output.",
+    exitCode: 0,
+    duration: "0.8s",
+    output: {
+      stdout: ["M app/(tabs)/sessions/[sessionId]/page.tsx", "?? components/session/command-composer.tsx"],
+      stderr: ["Mock warning: workspace state is illustrative only."],
+    },
+    safetyCheck: warningSafetyCheck,
+  },
+  {
+    id: "preset-lint",
+    label: "Preview lint failure",
+    command: "npm run lint",
+    description: "Mock failure state for command review and UI testing.",
+    status: "failed",
+    summary: "The simulator returns a failed exit code and stderr-style output.",
+    exitCode: 1,
+    duration: "2.1s",
+    output: {
+      stdout: ["> terminalflow@0.2.0 lint", "> eslint ."],
+      stderr: ["1 problem found in static preview mode."],
+    },
+    safetyCheck: warningSafetyCheck,
+  },
+  {
+    id: "preset-ssh",
+    label: "Blocked host probe",
+    command: "ssh staging",
+    description: "Intentionally blocked to show the safety explanation path.",
+    status: "blocked",
+    summary: "The simulator blocks this command and explains why before any result is shown.",
+    exitCode: null,
+    duration: "--",
+    output: {
+      stdout: [],
+      stderr: [],
+    },
+    safetyCheck: blockedSafetyCheck,
   },
 ];
 

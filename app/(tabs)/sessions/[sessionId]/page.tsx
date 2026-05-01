@@ -18,12 +18,13 @@ export function generateStaticParams() {
   return MOCK_SESSIONS.map((session) => ({ sessionId: session.id }));
 }
 
-export default function SessionDetailPage({
+export default async function SessionDetailPage({
   params,
 }: {
-  params: { sessionId: string };
+  params: Promise<{ sessionId: string }>;
 }) {
-  const session = MOCK_SESSIONS.find(({ id }) => id === params.sessionId);
+  const { sessionId } = await params;
+  const session = MOCK_SESSIONS.find(({ id }) => id === sessionId);
 
   if (!session) {
     notFound();
