@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 15: Execution readiness gate and preflight review UI.
+Phase 16: Local execution plan builder and dry-run summary UI.
 
 ## Hard constraints
 
