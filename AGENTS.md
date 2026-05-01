@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 19: Local audit trail and change history UI.
+Phase 20: Local release notes and milestone review UI.
 
 ## Hard constraints
 
