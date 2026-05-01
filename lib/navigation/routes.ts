@@ -3,6 +3,7 @@ export const ROUTES = {
   hub: "/hub",
   projects: "/projects",
   sessions: "/sessions",
+  hosts: "/hosts",
   workflows: "/workflows",
   settings: "/settings",
 } as const;
@@ -13,6 +14,7 @@ export const TAB_ROUTES = [
   ROUTES.hub,
   ROUTES.projects,
   ROUTES.sessions,
+  ROUTES.hosts,
   ROUTES.workflows,
   ROUTES.settings,
 ] as const;
@@ -21,6 +23,7 @@ export const TAB_NAV_ITEMS = [
   { label: "Hub", href: ROUTES.hub },
   { label: "Projects", href: ROUTES.projects },
   { label: "Sessions", href: ROUTES.sessions },
+  { label: "Hosts", href: ROUTES.hosts },
   { label: "Workflows", href: ROUTES.workflows },
   { label: "Settings", href: ROUTES.settings },
 ] as const;
@@ -29,3 +32,7 @@ export const SESSION_DETAIL_ROUTE = "/sessions/[sessionId]";
 
 export const sessionDetailRoute = (sessionId: string) =>
   `${ROUTES.sessions}/${sessionId}`;
+
+export const HOST_DETAIL_ROUTE = "/hosts/[hostId]";
+
+export const hostDetailRoute = (hostId: string) => `${ROUTES.hosts}/${hostId}`;

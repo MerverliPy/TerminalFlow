@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { ROUTES } from "@/lib/navigation/routes";
+
 const SETTINGS_GROUPS = [
   {
     label: "Workspace",
@@ -16,6 +20,12 @@ const SETTINGS_GROUPS = [
     title: "Mobile controls",
     value: "Thumb-friendly tabs",
     note: "This phase only defines the navigation shell.",
+  },
+  {
+    label: "Hosts",
+    title: "Setup surface",
+    value: "Static profile cards",
+    note: "Use the Hosts tab for connection boundaries and safety checks.",
   },
 ] as const;
 
@@ -44,6 +54,9 @@ export default function SettingsPage() {
             </article>
           ))}
         </div>
+        <Link className="settings-link" href={ROUTES.hosts}>
+          Open Hosts
+        </Link>
       </section>
     </main>
   );

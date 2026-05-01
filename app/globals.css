@@ -13,7 +13,7 @@
   --good: #34d399;
   --warn: #fbbf24;
   --shadow: 0 20px 70px rgba(2, 6, 23, 0.55);
-  --dock-height: 5.25rem;
+  --dock-height: 7.4rem;
   font-family:
     "Avenir Next", "Segoe UI", "Trebuchet MS", system-ui, sans-serif;
 }
@@ -176,6 +176,14 @@ a {
 
 .settings-grid {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.settings-link,
+.host-detail-header__back,
+.session-detail-header__back {
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 .stat-card,
@@ -341,14 +349,15 @@ a {
   gap: 0.75rem;
 }
 
-.session-detail-header__back {
-  color: var(--accent);
-  font-size: 0.92rem;
-  font-weight: 600;
-}
-
 .session-meta-grid,
 .session-panel__grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.host-meta-grid,
+.host-panel__grid {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
@@ -394,6 +403,20 @@ a {
 .session-history {
   display: grid;
   gap: 0.75rem;
+}
+
+.host-checklist {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.host-check {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.65rem;
 }
 
 .history-entry {
@@ -473,6 +496,11 @@ a {
   gap: 0.4rem;
 }
 
+.host-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
 .nav-spacer {
   height: var(--dock-height);
 }
@@ -492,7 +520,7 @@ a {
   margin: 0 auto;
   padding: 0.45rem;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.35rem;
   border-radius: 1.15rem;
   border: 1px solid var(--border);
@@ -506,7 +534,7 @@ a {
   display: grid;
   justify-items: center;
   gap: 0.3rem;
-  padding: 0.7rem 0.35rem;
+  padding: 0.58rem 0.35rem;
   border-radius: 0.85rem;
   color: var(--muted);
   transition:
@@ -549,6 +577,10 @@ a {
 }
 
 @media (min-width: 48rem) {
+  :root {
+    --dock-height: 5.4rem;
+  }
+
   .shell__frame {
     padding-inline: 1.25rem;
   }
@@ -559,6 +591,10 @@ a {
 
   .mobile-tab-nav__link {
     grid-template-columns: auto;
+  }
+
+  .mobile-tab-nav__inner {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .composer__actions {

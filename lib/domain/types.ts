@@ -1,18 +1,33 @@
-export type ConnectionState = "connected" | "connecting" | "offline";
+export type HostStatus = "connected" | "connecting" | "offline";
 export type ProjectHealth = "ready" | "attention";
 export type SessionStatus = "running" | "idle" | "paused";
 export type SessionState = SessionStatus;
 export type CommandStatus = "completed" | "queued" | "draft" | "blocked";
+export type HostEnvironment = "local" | "lab" | "remote";
+export type ConnectionMethod = "local profile" | "saved preset" | "manual setup";
+export type HostSafetyCheckState = "pass" | "warn" | "blocked";
 export type WorkflowState = "ready" | "draft" | "blocked";
+
+export type ConnectionState = HostStatus;
 
 export interface HostConnection {
   id: string;
   name: string;
   host: string;
-  status: ConnectionState;
-  platform: string;
+  status: HostStatus;
+  environment: HostEnvironment;
+  operatingSystem: string;
+  connectionMethod: ConnectionMethod;
   workspaceRoot: string;
-  lastSeenAt: string;
+  lastCheckedAt: string;
+  safetyChecks: HostSafetyCheck[];
+}
+
+export interface HostSafetyCheck {
+  id: string;
+  label: string;
+  state: HostSafetyCheckState;
+  detail: string;
 }
 
 export interface Project {
