@@ -11,7 +11,6 @@ export const ROUTES = {
   settings: "/settings",
   settingsPermissions: "/settings/permissions",
   settingsSecrets: "/settings/secrets",
-  settingsNotifications: "/settings/notifications",
 } as const;
 
 export const DEFAULT_ROUTE = ROUTES.hub;
