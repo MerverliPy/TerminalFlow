@@ -70,6 +70,9 @@ export default function SettingsPage() {
         <Link className="settings-link" href={ROUTES.settingsPermissions}>
           Open Workspace Permissions
         </Link>
+        <Link className="settings-link" href={ROUTES.settingsSecrets}>
+          Open Secrets Vault
+        </Link>
       </section>
     </main>
   );

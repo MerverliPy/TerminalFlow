@@ -93,6 +93,57 @@ export interface WorkspaceAccessReview {
   invites: WorkspaceInvitePreview[];
 }
 
+export type SecretRiskLevel = "low" | "medium" | "high";
+export type SecretRotationState = "fresh" | "due" | "stale";
+export type SecretProvider = "manual" | "mock-managed" | "local-note";
+export type SecretScope = "workspace" | "project" | "host-profile";
+
+export interface SecretCategory {
+  id: string;
+  title: string;
+  summary: string;
+  provider: SecretProvider;
+  scope: SecretScope;
+}
+
+export interface SecretMetadata {
+  id: string;
+  label: string;
+  categoryId: string;
+  provider: SecretProvider;
+  scope: SecretScope;
+  riskLevel: SecretRiskLevel;
+  rotationState: SecretRotationState;
+  lastReviewedAt: string;
+  lastUpdatedAt: string;
+  redactedValue: string;
+  owner: string;
+}
+
+export interface SecretAccessFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: "info" | "warn" | "blocked";
+}
+
+export interface SecretAccessPolicy {
+  id: string;
+  workspaceId: string;
+  title: string;
+  summary: string;
+  allowedRoles: WorkspaceRole[];
+  findings: SecretAccessFinding[];
+}
+
+export interface SecretActivityEvent {
+  id: string;
+  time: string;
+  kind: "review" | "policy" | "redaction" | "rotation";
+  title: string;
+  detail: string;
+}
+
 export interface MockAuthSession {
   userId: string;
   activeWorkspaceId: string;

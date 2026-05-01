@@ -10,6 +10,10 @@ import type {
 } from "@/lib/domain/types";
 import type {
   MockAuthSession,
+  SecretAccessPolicy,
+  SecretActivityEvent,
+  SecretCategory,
+  SecretMetadata,
   User,
   Workspace,
   WorkspaceAccessReview,
@@ -249,6 +253,133 @@ export const MOCK_AUTH_SESSION: MockAuthSession = {
   activeWorkspaceId: "workspace-terminalflow",
   signedInAt: "Just now",
 };
+
+export const MOCK_SECRET_CATEGORIES: SecretCategory[] = [
+  {
+    id: "category-deploy",
+    title: "Deployment metadata",
+    summary: "Workspace-scoped deployment notes and environment references.",
+    provider: "mock-managed",
+    scope: "workspace",
+  },
+  {
+    id: "category-automation",
+    title: "Automation metadata",
+    summary: "Project automation labels used for local review only.",
+    provider: "manual",
+    scope: "project",
+  },
+  {
+    id: "category-host",
+    title: "Host profile metadata",
+    summary: "Host-facing configuration notes without credential values.",
+    provider: "local-note",
+    scope: "host-profile",
+  },
+];
+
+export const MOCK_SECRET_METADATA: SecretMetadata[] = [
+  {
+    id: "secret-deploy-note",
+    label: "Deploy note",
+    categoryId: "category-deploy",
+    provider: "mock-managed",
+    scope: "workspace",
+    riskLevel: "medium",
+    rotationState: "due",
+    lastReviewedAt: "Today",
+    lastUpdatedAt: "Yesterday",
+    redactedValue: "••••••••",
+    owner: "TerminalFlow Core",
+  },
+  {
+    id: "secret-automation-tag",
+    label: "Automation tag",
+    categoryId: "category-automation",
+    provider: "manual",
+    scope: "project",
+    riskLevel: "low",
+    rotationState: "fresh",
+    lastReviewedAt: "2 days ago",
+    lastUpdatedAt: "2 days ago",
+    redactedValue: "••••••••",
+    owner: "SignalOps",
+  },
+  {
+    id: "secret-host-note",
+    label: "Host note",
+    categoryId: "category-host",
+    provider: "local-note",
+    scope: "host-profile",
+    riskLevel: "high",
+    rotationState: "stale",
+    lastReviewedAt: "Last week",
+    lastUpdatedAt: "Last week",
+    redactedValue: "••••••••",
+    owner: "Primary Linux host",
+  },
+];
+
+export const MOCK_SECRET_ACCESS_POLICIES: SecretAccessPolicy[] = [
+  {
+    id: "policy-vault-core",
+    workspaceId: "workspace-terminalflow",
+    title: "Vault read preview",
+    summary: "Read access is limited to local mock workspace roles and never reveals secret material.",
+    allowedRoles: ["owner", "admin"],
+    findings: [
+      {
+        id: "policy-finding-1",
+        title: "Redaction enforced",
+        detail: "All secret records render with metadata and a redacted display only.",
+        severity: "info",
+      },
+      {
+        id: "policy-finding-2",
+        title: "Rotate disabled",
+        detail: "Rotation controls are visible but perform no secret action.",
+        severity: "warn",
+      },
+      {
+        id: "policy-finding-3",
+        title: "No backend vault",
+        detail: "The vault is metadata-only and stores no secret values locally.",
+        severity: "blocked",
+      },
+    ],
+  },
+];
+
+export const MOCK_SECRET_ACTIVITY_EVENTS: SecretActivityEvent[] = [
+  {
+    id: "activity-1",
+    time: "Now",
+    kind: "review",
+    title: "Vault reviewed locally",
+    detail: "Metadata cards were rendered from static records only.",
+  },
+  {
+    id: "activity-2",
+    time: "2 hours ago",
+    kind: "policy",
+    title: "Policy preview refreshed",
+    detail: "Allowed roles and redaction warnings were updated in local state.",
+  },
+  {
+    id: "activity-3",
+    time: "Yesterday",
+    kind: "rotation",
+    title: "Rotation marked due",
+    detail: "Rotation state is a mock status without secret material or key handling.",
+  },
+  {
+    id: "activity-4",
+    time: "Last week",
+    kind: "redaction",
+    title: "Value display redacted",
+    detail: "Secret values remain hidden and never exist in storage for this phase.",
+  },
+];
 
 export const MOCK_HOST_CONNECTIONS: HostConnection[] = [
   {
