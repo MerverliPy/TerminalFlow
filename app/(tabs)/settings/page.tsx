@@ -67,6 +67,9 @@ export default function SettingsPage() {
         <Link className="settings-link" href={ROUTES.hosts}>
           Open Hosts
         </Link>
+        <Link className="settings-link" href={ROUTES.settingsPermissions}>
+          Open Workspace Permissions
+        </Link>
       </section>
     </main>
   );

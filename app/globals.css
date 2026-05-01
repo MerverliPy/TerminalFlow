@@ -425,6 +425,43 @@ a {
   align-items: center;
 }
 
+.member-list,
+.permission-group-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.member-row,
+.permission-chip {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.member-row__identity,
+.member-row__meta,
+.member-row__footer {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.member-row__identity {
+  justify-content: space-between;
+}
+
+.member-row__meta {
+  justify-content: flex-start;
+}
+
+.member-row__footer {
+  color: var(--muted);
+}
+
 .landing-shell {
   width: min(100%, 58rem);
   margin: 0 auto;

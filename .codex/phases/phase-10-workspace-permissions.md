@@ -149,4 +149,8 @@ Use:
 
 ## Completion summary
 
-Pending.
+Completed locally.
+
+Validation evidence:
+
+- `npm run typecheck` passed.

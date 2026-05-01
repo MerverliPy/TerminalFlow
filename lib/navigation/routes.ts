@@ -8,6 +8,7 @@ export const ROUTES = {
   hosts: "/hosts",
   workflows: "/workflows",
   settings: "/settings",
+  settingsPermissions: "/settings/permissions",
 } as const;
 
 export const DEFAULT_ROUTE = ROUTES.hub;

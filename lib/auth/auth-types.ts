@@ -28,6 +28,71 @@ export interface WorkspaceMembership {
   joinedAt: string;
 }
 
+export type WorkspacePermissionState = "allowed" | "review" | "blocked";
+
+export interface WorkspacePermission {
+  id: string;
+  key: string;
+  label: string;
+  summary: string;
+  state: WorkspacePermissionState;
+}
+
+export interface WorkspacePermissionGroup {
+  id: string;
+  workspaceId: string;
+  title: string;
+  summary: string;
+  role: WorkspaceRole;
+  permissions: WorkspacePermission[];
+}
+
+export interface WorkspaceMember {
+  id: string;
+  workspaceId: string;
+  displayName: string;
+  email: string;
+  role: WorkspaceRole;
+  status: "active" | "invited" | "suspended";
+  joinedAt: string;
+  lastSeenAt: string;
+  permissionGroupIds: string[];
+}
+
+export type WorkspaceAccessSeverity = "info" | "warn" | "blocked";
+
+export interface WorkspaceAccessFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: WorkspaceAccessSeverity;
+}
+
+export interface WorkspaceAuditNote {
+  id: string;
+  title: string;
+  detail: string;
+}
+
+export interface WorkspaceInvitePreview {
+  id: string;
+  email: string;
+  role: WorkspaceRole;
+  groupId: string;
+  status: "draft" | "disabled";
+}
+
+export interface WorkspaceAccessReview {
+  id: string;
+  workspaceId: string;
+  reviewedAt: string;
+  reviewedBy: string;
+  summary: string;
+  findings: WorkspaceAccessFinding[];
+  notes: WorkspaceAuditNote[];
+  invites: WorkspaceInvitePreview[];
+}
+
 export interface MockAuthSession {
   userId: string;
   activeWorkspaceId: string;

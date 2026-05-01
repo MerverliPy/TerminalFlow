@@ -8,7 +8,15 @@ import type {
   WorkflowRun,
   Workflow,
 } from "@/lib/domain/types";
-import type { MockAuthSession, User, Workspace, WorkspaceMembership } from "@/lib/auth/auth-types";
+import type {
+  MockAuthSession,
+  User,
+  Workspace,
+  WorkspaceAccessReview,
+  WorkspaceMember,
+  WorkspaceMembership,
+  WorkspacePermissionGroup,
+} from "@/lib/auth/auth-types";
 
 export const MOCK_USERS: User[] = [
   {
@@ -67,6 +75,172 @@ export const MOCK_WORKSPACE_MEMBERSHIPS: WorkspaceMembership[] = [
     userId: "user-calvin",
     role: "viewer",
     joinedAt: "Today",
+  },
+];
+
+export const MOCK_WORKSPACE_MEMBERS: WorkspaceMember[] = [
+  {
+    id: "member-calvin",
+    workspaceId: "workspace-terminalflow",
+    displayName: "Calvin Reed",
+    email: "calvin@terminalflow.local",
+    role: "owner",
+    status: "active",
+    joinedAt: "3 months ago",
+    lastSeenAt: "Just now",
+    permissionGroupIds: ["group-core-admin"],
+  },
+  {
+    id: "member-aisha",
+    workspaceId: "workspace-terminalflow",
+    displayName: "Aisha Patel",
+    email: "aisha@terminalflow.local",
+    role: "admin",
+    status: "active",
+    joinedAt: "2 weeks ago",
+    lastSeenAt: "4 hours ago",
+    permissionGroupIds: ["group-core-editor"],
+  },
+  {
+    id: "member-ron",
+    workspaceId: "workspace-terminalflow",
+    displayName: "Ron Vega",
+    email: "ron@terminalflow.local",
+    role: "viewer",
+    status: "invited",
+    joinedAt: "Pending",
+    lastSeenAt: "Not yet active",
+    permissionGroupIds: ["group-core-viewer"],
+  },
+];
+
+export const MOCK_WORKSPACE_PERMISSION_GROUPS: WorkspacePermissionGroup[] = [
+  {
+    id: "group-core-admin",
+    workspaceId: "workspace-terminalflow",
+    title: "Core admin",
+    summary: "Full workspace control for mock review only.",
+    role: "owner",
+    permissions: [
+      {
+        id: "perm-invite",
+        key: "invite-members",
+        label: "Invite members",
+        summary: "Open a new invite preview for the workspace.",
+        state: "review",
+      },
+      {
+        id: "perm-role",
+        key: "change-roles",
+        label: "Change roles",
+        summary: "Adjust role labels in the local review model.",
+        state: "review",
+      },
+      {
+        id: "perm-remove",
+        key: "remove-members",
+        label: "Remove members",
+        summary: "Expose member removal as disabled UI only.",
+        state: "blocked",
+      },
+    ],
+  },
+  {
+    id: "group-core-editor",
+    workspaceId: "workspace-terminalflow",
+    title: "Workspace editor",
+    summary: "Collaborator access with limited invite review.",
+    role: "admin",
+    permissions: [
+      {
+        id: "perm-projects",
+        key: "edit-projects",
+        label: "Edit projects",
+        summary: "Inspect project-linked workspace data.",
+        state: "allowed",
+      },
+      {
+        id: "perm-workflows",
+        key: "review-workflows",
+        label: "Review workflows",
+        summary: "View workflow permission scope in this phase.",
+        state: "review",
+      },
+    ],
+  },
+  {
+    id: "group-core-viewer",
+    workspaceId: "workspace-terminalflow",
+    title: "Read-only viewer",
+    summary: "Visibility into surfaces without member management.",
+    role: "viewer",
+    permissions: [
+      {
+        id: "perm-read",
+        key: "read-surfaces",
+        label: "Read surfaces",
+        summary: "Can inspect the mock access review panels.",
+        state: "allowed",
+      },
+      {
+        id: "perm-invite-preview",
+        key: "invite-preview",
+        label: "Invite preview",
+        summary: "Invite actions render but stay disabled.",
+        state: "blocked",
+      },
+    ],
+  },
+];
+
+export const MOCK_WORKSPACE_ACCESS_REVIEWS: WorkspaceAccessReview[] = [
+  {
+    id: "review-terminalflow-core",
+    workspaceId: "workspace-terminalflow",
+    reviewedAt: "Today",
+    reviewedBy: "Local mock reviewer",
+    summary: "One viewer invite remains pending and all role changes are local previews only.",
+    findings: [
+      {
+        id: "finding-1",
+        title: "Pending viewer invite",
+        detail: "Invite preview is present but disabled, so no real invite is issued.",
+        severity: "warn",
+      },
+      {
+        id: "finding-2",
+        title: "Owner scope is local",
+        detail: "The owner role only affects mock UI labels and review surfaces.",
+        severity: "info",
+      },
+      {
+        id: "finding-3",
+        title: "Member removal is disabled",
+        detail: "Removal controls render as simulated actions without side effects.",
+        severity: "blocked",
+      },
+    ],
+    notes: [
+      {
+        id: "note-1",
+        title: "Review note",
+        detail: "All member, invite, and role interactions are read-only mock surfaces.",
+      },
+      {
+        id: "note-2",
+        title: "Boundary note",
+        detail: "No backend authorization or RBAC enforcement is active in this phase.",
+      },
+    ],
+    invites: [
+      {
+        id: "invite-ron",
+        email: "ron@terminalflow.local",
+        role: "viewer",
+        groupId: "group-core-viewer",
+        status: "draft",
+      },
+    ],
   },
 ];
 
