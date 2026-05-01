@@ -192,3 +192,14 @@ export interface SimulatedCommandResult {
   safetyCheck: CommandSimulationSafetyCheck;
   blockedReason?: string;
 }
+
+export type {
+  AuthState,
+  MockAuthSession,
+  User,
+  UserProfile,
+  Workspace,
+  WorkspaceMembership,
+  WorkspaceRole,
+  WorkspaceSelection,
+} from "@/lib/auth/auth-types";
