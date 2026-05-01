@@ -20,6 +20,9 @@ export type WorkflowRunEventKind =
   | "completed";
 export type WorkflowRunLogLevel = "stdout" | "stderr" | "info" | "warn" | "error";
 export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
+export type CommandSimulationMode = "preset" | "manual";
+export type SimulatedCommandStatus = "completed" | "warning" | "blocked" | "failed";
+export type CommandSimulationSafetyCheckState = "allowlisted" | "warning" | "blocked";
 
 export type ConnectionState = HostStatus;
 
@@ -140,4 +143,52 @@ export interface WorkflowRunLogEntry {
   stream: "stdout" | "stderr";
   message: string;
   stepId?: string;
+}
+
+export interface CommandSimulationSafetyCheck {
+  id: string;
+  label: string;
+  state: CommandSimulationSafetyCheckState;
+  detail: string;
+}
+
+export interface SimulatedCommandOutput {
+  stdout: string[];
+  stderr: string[];
+}
+
+export interface SimulatedCommandPreset {
+  id: string;
+  label: string;
+  command: string;
+  description: string;
+  status: SimulatedCommandStatus;
+  summary: string;
+  exitCode: number | null;
+  duration: string;
+  output: SimulatedCommandOutput;
+  safetyCheck: CommandSimulationSafetyCheck;
+}
+
+export interface SimulatedCommand {
+  id: string;
+  command: string;
+  presetId?: string;
+  mode: CommandSimulationMode;
+  submittedAt: string;
+}
+
+export interface SimulatedCommandResult {
+  id: string;
+  command: string;
+  presetId?: string;
+  presetLabel?: string;
+  mode: CommandSimulationMode;
+  status: SimulatedCommandStatus;
+  exitCode: number | null;
+  duration: string;
+  summary: string;
+  output: SimulatedCommandOutput;
+  safetyCheck: CommandSimulationSafetyCheck;
+  blockedReason?: string;
 }

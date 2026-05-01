@@ -487,6 +487,114 @@ a {
   line-height: 1.5;
 }
 
+.command-simulation-panel,
+.command-preset-panel,
+.command-result-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.command-preset-list,
+.command-result-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.command-preset {
+  width: 100%;
+  text-align: left;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.65rem;
+  color: inherit;
+  font: inherit;
+}
+
+.command-preset--active {
+  border-color: var(--border-strong);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.command-preset__top,
+.sim-result__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sim-result {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sim-result__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.sim-result__meta-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 0.32rem 0.55rem;
+  background: rgba(5, 8, 22, 0.72);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sim-result__outputs {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sim-output {
+  border-radius: 0.95rem;
+  border: 1px solid var(--border);
+  background: rgba(5, 8, 22, 0.72);
+  padding: 0.85rem 0.9rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sim-output__label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sim-output__body {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.sim-result__blocked {
+  margin: 0;
+  border-radius: 0.95rem;
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  background: rgba(251, 191, 36, 0.08);
+  padding: 0.85rem 0.9rem;
+  color: #fde68a;
+  line-height: 1.5;
+}
+
 .session-safety-note {
   border-radius: 1rem;
   border: 1px solid rgba(251, 191, 36, 0.2);
@@ -717,5 +825,9 @@ a {
 
   .run-actions {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sim-result__outputs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
