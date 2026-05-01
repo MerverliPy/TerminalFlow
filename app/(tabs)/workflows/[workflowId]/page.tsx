@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MOCK_WORKFLOWS, MOCK_WORKFLOW_RUNS } from "@/lib/domain/mock-data";
 import {
   ROUTES,
+  workflowPlanRoute,
   workflowPreflightRoute,
   workflowRunsRoute,
 } from "@/lib/navigation/routes";
@@ -47,6 +48,9 @@ export default async function WorkflowDetailPage({
         <div className="workflow-builder__status">
           <Link className="settings-link" href={ROUTES.workflows}>
             Back to workflows
+          </Link>
+          <Link className="settings-link" href={workflowPlanRoute(workflow.id)}>
+            Open plan
           </Link>
           <Link className="settings-link" href={workflowPreflightRoute(workflow.id)}>
             Open preflight

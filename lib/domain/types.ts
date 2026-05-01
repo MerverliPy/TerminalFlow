@@ -76,6 +76,31 @@ export type ExecutionPreflightActionKind =
   | "export-preflight-report";
 export type ExecutionPreflightActionMode = "disabled" | "preview";
 export type ExecutionPreflightCategoryKind = ReadinessCategoryKind;
+export type LocalExecutionPlanStatus = "draft" | "ready" | "blocked";
+export type LocalExecutionPlanRiskLevel = "low" | "medium" | "high";
+export type LocalExecutionPlanStepStatus = "planned" | "ready" | "blocked";
+export type LocalExecutionPlanStepKind =
+  | "check"
+  | "command"
+  | "decision"
+  | "handoff"
+  | "review";
+export type LocalExecutionPlanDependencyKind =
+  | "workflow"
+  | "host"
+  | "session"
+  | "command"
+  | "step";
+export type DryRunFindingSeverity = "info" | "warn" | "blocked";
+export type ExecutionPlanActionKind =
+  | "confirm-plan"
+  | "start-run"
+  | "export-plan"
+  | "share-plan"
+  | "refresh-estimate"
+  | "approve-dry-run";
+export type ExecutionPlanActionMode = "disabled" | "preview";
+export type ExecutionPlanMappingKind = "workflow" | "host" | "session" | "command";
 
 export interface IntegrationProviderCategory {
   id: string;
@@ -397,6 +422,88 @@ export interface ExecutionGateActionPreview {
   label: string;
   detail: string;
   mode: ExecutionPreflightActionMode;
+}
+
+export interface LocalExecutionPlan {
+  id: string;
+  workflowId: string;
+  title: string;
+  summary: string;
+  status: LocalExecutionPlanStatus;
+  riskLevel: LocalExecutionPlanRiskLevel;
+  estimatedDuration: string;
+  stepIds: string[];
+  dependencyIds: string[];
+  mappingIds: string[];
+  dryRunSummaryId: string;
+  note: string;
+}
+
+export interface LocalExecutionPlanStep {
+  id: string;
+  planId: string;
+  order: number;
+  title: string;
+  kind: LocalExecutionPlanStepKind;
+  status: LocalExecutionPlanStepStatus;
+  detail: string;
+  estimatedDuration: string;
+  dependencyIds: string[];
+  actionPreviewIds: string[];
+  preview: string;
+}
+
+export interface LocalExecutionPlanDependency {
+  id: string;
+  planId: string;
+  kind: LocalExecutionPlanDependencyKind;
+  order: number;
+  label: string;
+  detail: string;
+  fromStepId: string;
+  toStepId: string;
+}
+
+export interface DryRunFinding {
+  id: string;
+  planId: string;
+  title: string;
+  detail: string;
+  severity: DryRunFindingSeverity;
+  recommendation: string;
+}
+
+export interface ExecutionPlanActionPreview {
+  id: string;
+  kind: ExecutionPlanActionKind;
+  label: string;
+  detail: string;
+  mode: ExecutionPlanActionMode;
+}
+
+export interface ExecutionPlanMapping {
+  id: string;
+  planId: string;
+  kind: ExecutionPlanMappingKind;
+  label: string;
+  source: string;
+  target: string;
+  detail: string;
+  preview: string;
+}
+
+export interface DryRunSummary {
+  id: string;
+  planId: string;
+  title: string;
+  summary: string;
+  estimatedDuration: string;
+  riskLevel: LocalExecutionPlanRiskLevel;
+  riskSummary: string;
+  dependencySummary: string;
+  findingIds: string[];
+  actionPreviewIds: string[];
+  note: string;
 }
 
 export interface TerminalSession {
