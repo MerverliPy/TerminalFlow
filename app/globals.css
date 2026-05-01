@@ -222,6 +222,10 @@ a {
   font-weight: 600;
 }
 
+.settings-link {
+  width: fit-content;
+}
+
 .stat-card,
 .settings-card {
   border-radius: 1rem;
@@ -466,8 +470,8 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 
-.notification-actions {
-  grid-template-columns: repeat(auto-fit, minmax(8.75rem, 1fr));
+.integration-actions {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
 }
 
 .secret-card,
@@ -509,6 +513,11 @@ a {
 }
 
 .notification-card--unread {
+.integration-provider-card {
+  gap: 0.7rem;
+}
+
+.integration-provider-card--active {
   border-color: var(--border-strong);
   background: rgba(56, 189, 248, 0.08);
 }
@@ -518,6 +527,7 @@ a {
 }
 
 .notification-card__meta {
+.integration-provider-card__meta {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;

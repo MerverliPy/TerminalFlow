@@ -23,55 +23,46 @@ export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
 export type CommandSimulationMode = "preset" | "manual";
 export type SimulatedCommandStatus = "completed" | "warning" | "blocked" | "failed";
 export type CommandSimulationSafetyCheckState = "allowlisted" | "warning" | "blocked";
-export type NotificationSeverity = "low" | "medium" | "high" | "critical";
-export type NotificationStatus = "unread" | "read" | "snoozed" | "resolved" | "archived";
-export type NotificationSource = "integration" | "workspace" | "system" | "review";
-export type AlertReviewStatus = "open" | "reviewing" | "escalated" | "resolved";
-export type AlertActionKind =
-  | "mark-read"
-  | "snooze"
-  | "resolve"
-  | "archive"
-  | "escalate"
-  | "open-provider";
-export type NotificationActivityEventKind =
-  | "received"
-  | "reviewed"
-  | "status-changed"
-  | "escalated"
-  | "archived";
+export type IntegrationConnectionStatus = "connected" | "reviewing" | "syncing" | "offline" | "blocked";
+export type IntegrationRiskLevel = "low" | "medium" | "high";
+export type IntegrationReviewFindingSeverity = "info" | "warn" | "blocked";
+export type IntegrationActivityEventKind = "review" | "scope" | "status" | "sync" | "policy";
+export type IntegrationActionKind =
+  | "connect"
+  | "disconnect"
+  | "reconnect"
+  | "sync"
+  | "authorize"
+  | "revoke";
+export type IntegrationActionMode = "disabled" | "simulated";
 
-export interface NotificationCategory {
+export interface IntegrationProviderCategory {
   id: string;
   title: string;
   summary: string;
-  source: NotificationSource;
   note: string;
 }
 
-export interface AlertReviewItem {
+export interface IntegrationPermissionScope {
   id: string;
-  notificationId: string;
-  title: string;
-  summary: string;
-  status: AlertReviewStatus;
-  severity: NotificationSeverity;
-  detail: string;
-  recommendation: string;
-}
-
-export interface AlertActionPreview {
-  id: string;
-  kind: AlertActionKind;
+  key: string;
   label: string;
-  detail: string;
-  mode: "disabled" | "simulated";
+  summary: string;
+  preview: string;
+  riskNote: string;
 }
 
-export interface NotificationActivityEvent {
+export interface IntegrationReviewFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: IntegrationReviewFindingSeverity;
+}
+
+export interface IntegrationActivityEvent {
   id: string;
   time: string;
-  kind: NotificationActivityEventKind;
+  kind: IntegrationActivityEventKind;
   title: string;
   detail: string;
 }

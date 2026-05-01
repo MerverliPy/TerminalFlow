@@ -11,6 +11,7 @@ export const ROUTES = {
   settings: "/settings",
   settingsPermissions: "/settings/permissions",
   settingsSecrets: "/settings/secrets",
+  settingsIntegrations: "/settings/integrations",
 } as const;
 
 export const DEFAULT_ROUTE = ROUTES.hub;
@@ -59,3 +60,5 @@ export const workflowRunDetailRoute = (workflowId: string, runId: string) =>
 
 export const notificationDetailRoute = (notificationId: string) =>
   `${ROUTES.notifications}/${notificationId}`;
+export const settingsIntegrationDetailRoute = (providerId: string) =>
+  `${ROUTES.settingsIntegrations}/${providerId}`;
