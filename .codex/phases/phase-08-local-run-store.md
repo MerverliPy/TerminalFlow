@@ -1,6 +1,6 @@
 # Phase 08 — Persistence Schema and Local Run Store
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -144,4 +144,10 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented a typed browser-local persistence schema and adapter with explicit schema versioning, local seed/reset helpers, session/run/log/simulated-result persistence collections, and a settings surface that exposes storage status plus local-only restore/clear controls.
+
+Validation evidence:
+
+- `npm run typecheck` ✅
+- Browser QA via `google-chrome --headless=new` screenshots of `/settings` at desktop and mobile viewport sizes
+- `view_image` review of the rendered settings screenshots
