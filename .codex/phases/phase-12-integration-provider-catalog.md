@@ -162,4 +162,4 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented with local mock provider catalog, detail review surface, scope preview, safety notes, and disabled actions. Validation evidence: `npm run typecheck` passed.

@@ -1,6 +1,13 @@
 import type {
   CommandEntry,
   CommandSimulationSafetyCheck,
+  IntegrationActionPreview,
+  IntegrationActivityEvent,
+  IntegrationConnection,
+  IntegrationPermissionScope,
+  IntegrationProvider,
+  IntegrationProviderCategory,
+  IntegrationReviewFinding,
   HostConnection,
   Project,
   SimulatedCommandPreset,
@@ -380,6 +387,329 @@ export const MOCK_SECRET_ACTIVITY_EVENTS: SecretActivityEvent[] = [
     detail: "Secret values remain hidden and never exist in storage for this phase.",
   },
 ];
+
+export const MOCK_INTEGRATION_PROVIDER_CATEGORIES: IntegrationProviderCategory[] = [
+  {
+    id: "category-code",
+    title: "Code surfaces",
+    summary: "Review metadata for repository and code-review integrations without live API access.",
+    note: "Static connector previews only.",
+  },
+  {
+    id: "category-collaboration",
+    title: "Collaboration surfaces",
+    summary: "Coordinate mock chat, issue, and task providers in a local-only catalog.",
+    note: "Actions never leave the browser.",
+  },
+  {
+    id: "category-knowledge",
+    title: "Knowledge surfaces",
+    summary: "Browse documentation and knowledge providers as read-only review cards.",
+    note: "Permission scopes are preview metadata only.",
+  },
+  {
+    id: "category-design",
+    title: "Design surfaces",
+    summary: "Show design handoff and review providers with safety notes and disabled actions.",
+    note: "No provider SDKs or webhook receivers are used.",
+  },
+];
+
+export const MOCK_INTEGRATION_PERMISSION_SCOPES: IntegrationPermissionScope[] = [
+  {
+    id: "scope-repo-read",
+    key: "repo:read",
+    label: "Repository read preview",
+    summary: "Inspect repository metadata, branch names, and review summaries only.",
+    preview: "Read-only metadata preview.",
+    riskNote: "No token exchange or repo API calls are active.",
+  },
+  {
+    id: "scope-repo-comments",
+    key: "repo:comments",
+    label: "Review comment preview",
+    summary: "Show comment and review-note permissions as local UI metadata.",
+    preview: "Comment surfaces render disabled.",
+    riskNote: "No webhook listeners or write actions are available.",
+  },
+  {
+    id: "scope-chat-read",
+    key: "chat:read",
+    label: "Chat read preview",
+    summary: "Display channel and message scopes as static catalog data.",
+    preview: "Messages stay in mock records.",
+    riskNote: "No messaging provider API calls are made.",
+  },
+  {
+    id: "scope-docs-read",
+    key: "docs:read",
+    label: "Docs read preview",
+    summary: "Review document scopes for local-only knowledge surfaces.",
+    preview: "Documents are not synchronized.",
+    riskNote: "No sync jobs, refresh tokens, or storage are wired.",
+  },
+  {
+    id: "scope-design-read",
+    key: "design:read",
+    label: "Design read preview",
+    summary: "Show design file access as an inspection-only scope.",
+    preview: "Design cards stay read-only.",
+    riskNote: "No provider SDK or design API usage is added.",
+  },
+];
+
+export const MOCK_INTEGRATION_REVIEW_FINDINGS: IntegrationReviewFinding[] = [
+  {
+    id: "finding-integrations-1",
+    title: "No live OAuth",
+    detail: "Provider sign-in is represented only as mock UI and never launches real authorization.",
+    severity: "blocked",
+  },
+  {
+    id: "finding-integrations-2",
+    title: "Scopes are preview metadata",
+    detail: "Permission scopes explain intended access but do not grant or store access.",
+    severity: "info",
+  },
+  {
+    id: "finding-integrations-3",
+    title: "Actions are disabled",
+    detail: "Connect, disconnect, reconnect, sync, authorize, and revoke controls are inert.",
+    severity: "warn",
+  },
+  {
+    id: "finding-integrations-4",
+    title: "No backend connections",
+    detail: "The catalog is local-only and does not call provider APIs or background workers.",
+    severity: "blocked",
+  },
+];
+
+export const MOCK_INTEGRATION_ACTIVITY_EVENTS: IntegrationActivityEvent[] = [
+  {
+    id: "integration-activity-1",
+    time: "Now",
+    kind: "review",
+    title: "Catalog loaded locally",
+    detail: "Integration metadata was rendered from static records only.",
+  },
+  {
+    id: "integration-activity-2",
+    time: "5 minutes ago",
+    kind: "scope",
+    title: "Scope preview inspected",
+    detail: "Permission scopes were shown as read-only metadata cards.",
+  },
+  {
+    id: "integration-activity-3",
+    time: "12 minutes ago",
+    kind: "status",
+    title: "Connection status reviewed",
+    detail: "Connection states remain local review markers with no live provider state.",
+  },
+  {
+    id: "integration-activity-4",
+    time: "Yesterday",
+    kind: "sync",
+    title: "Sync preview masked",
+    detail: "Sync and authorize actions are rendered but do not invoke any backend workflow.",
+  },
+  {
+    id: "integration-activity-5",
+    time: "Last week",
+    kind: "policy",
+    title: "Boundary note refreshed",
+    detail: "The integrations phase remains scoped to mock records and disabled actions.",
+  },
+];
+
+export const MOCK_INTEGRATION_ACTION_PREVIEWS: IntegrationActionPreview[] = [
+  {
+    id: "integration-action-connect",
+    kind: "connect",
+    label: "Connect",
+    detail: "Render a connection preview without initiating OAuth.",
+    mode: "disabled",
+  },
+  {
+    id: "integration-action-disconnect",
+    kind: "disconnect",
+    label: "Disconnect",
+    detail: "Show disconnect review state without removing any real token or record.",
+    mode: "disabled",
+  },
+  {
+    id: "integration-action-reconnect",
+    kind: "reconnect",
+    label: "Reconnect",
+    detail: "Present a reconnect preview only.",
+    mode: "disabled",
+  },
+  {
+    id: "integration-action-sync",
+    kind: "sync",
+    label: "Sync",
+    detail: "Surface sync review actions without running jobs.",
+    mode: "disabled",
+  },
+  {
+    id: "integration-action-authorize",
+    kind: "authorize",
+    label: "Authorize",
+    detail: "Display the authorize step as a local-only control.",
+    mode: "disabled",
+  },
+  {
+    id: "integration-action-revoke",
+    kind: "revoke",
+    label: "Revoke",
+    detail: "Render revoke review controls but do not touch credentials.",
+    mode: "disabled",
+  },
+];
+
+export const MOCK_INTEGRATION_PROVIDERS: IntegrationProvider[] = [
+  {
+    id: "provider-repo-mirror",
+    name: "Repo Mirror",
+    categoryId: "category-code",
+    summary: "Static repository review surface for local code metadata.",
+    detail:
+      "The Repo Mirror provider shows branch, review, and repository scope previews without any GitHub OAuth, provider API calls, or token storage.",
+    connectionId: "connection-repo-mirror",
+    riskLevel: "medium",
+    scopeIds: ["scope-repo-read", "scope-repo-comments"],
+    workspaceNote: "Code surface for the current workspace only.",
+    connectionSummary: "Connected in review mode with no live provider session.",
+    reviewSummary:
+      "Repository metadata is represented as local cards and disabled actions only.",
+  },
+  {
+    id: "provider-team-chat",
+    name: "Team Chat",
+    categoryId: "category-collaboration",
+    summary: "Mock collaboration provider with message and channel preview scopes.",
+    detail:
+      "Team Chat surfaces channel visibility, message scope previews, and sync notes entirely from local records.",
+    connectionId: "connection-team-chat",
+    riskLevel: "high",
+    scopeIds: ["scope-chat-read"],
+    workspaceNote: "Read-only collaboration review surface.",
+    connectionSummary: "Reviewing connection metadata; no chat API integration is active.",
+    reviewSummary:
+      "Chat permissions are metadata-only and do not expose conversations or credentials.",
+  },
+  {
+    id: "provider-docs-index",
+    name: "Docs Index",
+    categoryId: "category-knowledge",
+    summary: "Documentation and knowledge provider preview with local safety notes.",
+    detail:
+      "Docs Index models document permissions and review findings without cloud sync or backend storage.",
+    connectionId: "connection-docs-index",
+    riskLevel: "low",
+    scopeIds: ["scope-docs-read"],
+    workspaceNote: "Knowledge provider review for static docs only.",
+    connectionSummary: "Offline preview status with no sync jobs or refresh tokens.",
+    reviewSummary:
+      "Documentation scopes remain preview metadata and never touch live provider content.",
+  },
+  {
+    id: "provider-design-desk",
+    name: "Design Desk",
+    categoryId: "category-design",
+    summary: "Design handoff provider preview for review-only interface checks.",
+    detail:
+      "Design Desk highlights design-file review scopes, status markers, and disabled authorize controls in a local mock catalog.",
+    connectionId: "connection-design-desk",
+    riskLevel: "medium",
+    scopeIds: ["scope-design-read"],
+    workspaceNote: "Design review metadata without SDKs or callbacks.",
+    connectionSummary: "Syncing preview state only; no provider SDK is loaded.",
+    reviewSummary:
+      "Design handoff metadata is shown for review while all actions remain inert.",
+  },
+];
+
+export const MOCK_INTEGRATION_CONNECTIONS: IntegrationConnection[] = [
+  {
+    id: "connection-repo-mirror",
+    providerId: "provider-repo-mirror",
+    workspaceId: "workspace-terminalflow",
+    status: "connected",
+    lastCheckedAt: "Now",
+    lastActivityAt: "4 minutes ago",
+    scopeIds: ["scope-repo-read", "scope-repo-comments"],
+    findingIds: ["finding-integrations-1", "finding-integrations-2"],
+    activityEventIds: ["integration-activity-1", "integration-activity-2"],
+    actionPreviewIds: [
+      "integration-action-connect",
+      "integration-action-disconnect",
+      "integration-action-sync",
+      "integration-action-authorize",
+    ],
+    riskNote: "Repository access is a local preview only and does not invoke OAuth.",
+  },
+  {
+    id: "connection-team-chat",
+    providerId: "provider-team-chat",
+    workspaceId: "workspace-terminalflow",
+    status: "reviewing",
+    lastCheckedAt: "8 minutes ago",
+    lastActivityAt: "12 minutes ago",
+    scopeIds: ["scope-chat-read"],
+    findingIds: ["finding-integrations-3", "finding-integrations-4"],
+    activityEventIds: ["integration-activity-3", "integration-activity-4"],
+    actionPreviewIds: [
+      "integration-action-connect",
+      "integration-action-reconnect",
+      "integration-action-revoke",
+    ],
+    riskNote: "Chat provider controls are local review markers only.",
+  },
+  {
+    id: "connection-docs-index",
+    providerId: "provider-docs-index",
+    workspaceId: "workspace-terminalflow",
+    status: "offline",
+    lastCheckedAt: "21 minutes ago",
+    lastActivityAt: "Yesterday",
+    scopeIds: ["scope-docs-read"],
+    findingIds: ["finding-integrations-2", "finding-integrations-4"],
+    activityEventIds: ["integration-activity-1", "integration-activity-5"],
+    actionPreviewIds: [
+      "integration-action-connect",
+      "integration-action-authorize",
+      "integration-action-sync",
+    ],
+    riskNote: "Offline metadata is retained only in local mock records.",
+  },
+  {
+    id: "connection-design-desk",
+    providerId: "provider-design-desk",
+    workspaceId: "workspace-terminalflow",
+    status: "syncing",
+    lastCheckedAt: "Now",
+    lastActivityAt: "5 minutes ago",
+    scopeIds: ["scope-design-read"],
+    findingIds: ["finding-integrations-1", "finding-integrations-3"],
+    activityEventIds: ["integration-activity-2", "integration-activity-3"],
+    actionPreviewIds: [
+      "integration-action-connect",
+      "integration-action-reconnect",
+      "integration-action-sync",
+      "integration-action-authorize",
+    ],
+    riskNote: "Design provider states are simulated and do not touch external services.",
+  },
+];
+
+export const MOCK_INTEGRATION_STATUS_SUMMARY = {
+  totalProviders: MOCK_INTEGRATION_PROVIDERS.length,
+  totalCategories: MOCK_INTEGRATION_PROVIDER_CATEGORIES.length,
+  totalScopes: MOCK_INTEGRATION_PERMISSION_SCOPES.length,
+  totalConnections: MOCK_INTEGRATION_CONNECTIONS.length,
+} as const;
 
 export const MOCK_HOST_CONNECTIONS: HostConnection[] = [
   {

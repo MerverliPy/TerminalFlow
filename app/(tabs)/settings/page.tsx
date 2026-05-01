@@ -73,6 +73,9 @@ export default function SettingsPage() {
         <Link className="settings-link" href={ROUTES.settingsSecrets}>
           Open Secrets Vault
         </Link>
+        <Link className="settings-link" href={ROUTES.settingsIntegrations}>
+          Open Integrations Catalog
+        </Link>
       </section>
     </main>
   );

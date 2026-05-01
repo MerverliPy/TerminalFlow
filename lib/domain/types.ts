@@ -23,6 +23,85 @@ export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
 export type CommandSimulationMode = "preset" | "manual";
 export type SimulatedCommandStatus = "completed" | "warning" | "blocked" | "failed";
 export type CommandSimulationSafetyCheckState = "allowlisted" | "warning" | "blocked";
+export type IntegrationConnectionStatus = "connected" | "reviewing" | "syncing" | "offline" | "blocked";
+export type IntegrationRiskLevel = "low" | "medium" | "high";
+export type IntegrationReviewFindingSeverity = "info" | "warn" | "blocked";
+export type IntegrationActivityEventKind = "review" | "scope" | "status" | "sync" | "policy";
+export type IntegrationActionKind =
+  | "connect"
+  | "disconnect"
+  | "reconnect"
+  | "sync"
+  | "authorize"
+  | "revoke";
+export type IntegrationActionMode = "disabled" | "simulated";
+
+export interface IntegrationProviderCategory {
+  id: string;
+  title: string;
+  summary: string;
+  note: string;
+}
+
+export interface IntegrationPermissionScope {
+  id: string;
+  key: string;
+  label: string;
+  summary: string;
+  preview: string;
+  riskNote: string;
+}
+
+export interface IntegrationReviewFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: IntegrationReviewFindingSeverity;
+}
+
+export interface IntegrationActivityEvent {
+  id: string;
+  time: string;
+  kind: IntegrationActivityEventKind;
+  title: string;
+  detail: string;
+}
+
+export interface IntegrationActionPreview {
+  id: string;
+  kind: IntegrationActionKind;
+  label: string;
+  detail: string;
+  mode: IntegrationActionMode;
+}
+
+export interface IntegrationConnection {
+  id: string;
+  providerId: string;
+  workspaceId: string;
+  status: IntegrationConnectionStatus;
+  lastCheckedAt: string;
+  lastActivityAt: string;
+  scopeIds: string[];
+  findingIds: string[];
+  activityEventIds: string[];
+  actionPreviewIds: string[];
+  riskNote: string;
+}
+
+export interface IntegrationProvider {
+  id: string;
+  name: string;
+  categoryId: string;
+  summary: string;
+  detail: string;
+  connectionId: string;
+  riskLevel: IntegrationRiskLevel;
+  scopeIds: string[];
+  workspaceNote: string;
+  connectionSummary: string;
+  reviewSummary: string;
+}
 
 export type ConnectionState = HostStatus;
 

@@ -222,6 +222,10 @@ a {
   font-weight: 600;
 }
 
+.settings-link {
+  width: fit-content;
+}
+
 .stat-card,
 .settings-card {
   border-radius: 1rem;
@@ -466,6 +470,10 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 
+.integration-actions {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
 .secret-card,
 .permission-group-card {
   gap: 0.7rem;
@@ -498,6 +506,38 @@ a {
 .secret-activity-list {
   display: grid;
   gap: 0.75rem;
+}
+
+.integration-provider-card {
+  gap: 0.7rem;
+}
+
+.integration-provider-card--active {
+  border-color: var(--border-strong);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.integration-provider-card__meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.integration-detail {
+  gap: 1rem;
+}
+
+.integration-detail__grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.integration-note {
+  border-radius: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(56, 189, 248, 0.08);
+  padding: 0.95rem 1rem;
+  display: grid;
+  gap: 0.4rem;
 }
 
 .landing-shell {
