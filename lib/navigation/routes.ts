@@ -31,7 +31,7 @@ export const TAB_NAV_ITEMS = [
   { label: "Sessions", href: ROUTES.sessions },
   { label: "Hosts", href: ROUTES.hosts },
   { label: "Workflows", href: ROUTES.workflows },
-  { label: "Alerts", href: ROUTES.notifications },
+  { label: "Notifications", href: ROUTES.notifications },
   { label: "Settings", href: ROUTES.settings },
 ] as const;
 
