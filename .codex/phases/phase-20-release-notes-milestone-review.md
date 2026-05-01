@@ -1,6 +1,6 @@
 # Phase 20 — Local Release Notes and Milestone Review UI
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -190,4 +190,9 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented local-only release notes and milestone review surfaces in Settings and the new release routes.
+
+Validation evidence:
+
+- `npm run typecheck`
+- Result: passed

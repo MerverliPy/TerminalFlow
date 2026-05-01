@@ -10,6 +10,7 @@ export const ROUTES = {
   workflows: "/workflows",
   notifications: "/notifications",
   settings: "/settings",
+  settingsReleases: "/settings/releases",
   settingsAudit: "/settings/audit",
   settingsPermissions: "/settings/permissions",
   settingsSecrets: "/settings/secrets",
@@ -85,3 +86,6 @@ export const settingsIntegrationDetailRoute = (providerId: string) =>
 
 export const settingsAuditEventDetailRoute = (eventId: string) =>
   `${ROUTES.settingsAudit}/${eventId}`;
+
+export const settingsReleaseDetailRoute = (releaseId: string) =>
+  `${ROUTES.settingsReleases}/${releaseId}`;
