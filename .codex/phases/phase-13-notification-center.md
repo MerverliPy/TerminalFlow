@@ -170,4 +170,4 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented with a local notification center, notification detail route, alert review panel, notification categories, disabled actions, activity timeline, and settings preference preview. Validation evidence: `npm run typecheck` passed.

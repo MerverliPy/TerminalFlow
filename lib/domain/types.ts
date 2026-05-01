@@ -23,6 +23,87 @@ export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
 export type CommandSimulationMode = "preset" | "manual";
 export type SimulatedCommandStatus = "completed" | "warning" | "blocked" | "failed";
 export type CommandSimulationSafetyCheckState = "allowlisted" | "warning" | "blocked";
+export type NotificationSeverity = "low" | "medium" | "high" | "critical";
+export type NotificationStatus = "unread" | "read" | "snoozed" | "resolved" | "archived";
+export type NotificationSource = "integration" | "workspace" | "system" | "review";
+export type AlertReviewStatus = "open" | "reviewing" | "escalated" | "resolved";
+export type AlertActionKind =
+  | "mark-read"
+  | "snooze"
+  | "resolve"
+  | "archive"
+  | "escalate"
+  | "open-provider";
+export type NotificationActivityEventKind =
+  | "received"
+  | "reviewed"
+  | "status-changed"
+  | "escalated"
+  | "archived";
+
+export interface NotificationCategory {
+  id: string;
+  title: string;
+  summary: string;
+  source: NotificationSource;
+  note: string;
+}
+
+export interface AlertReviewItem {
+  id: string;
+  notificationId: string;
+  title: string;
+  summary: string;
+  status: AlertReviewStatus;
+  severity: NotificationSeverity;
+  detail: string;
+  recommendation: string;
+}
+
+export interface AlertActionPreview {
+  id: string;
+  kind: AlertActionKind;
+  label: string;
+  detail: string;
+  mode: "disabled" | "simulated";
+}
+
+export interface NotificationActivityEvent {
+  id: string;
+  time: string;
+  kind: NotificationActivityEventKind;
+  title: string;
+  detail: string;
+}
+
+export interface NotificationPreferencePreview {
+  id: string;
+  label: string;
+  summary: string;
+  enabled: boolean;
+  note: string;
+}
+
+export interface Notification {
+  id: string;
+  categoryId: string;
+  title: string;
+  summary: string;
+  detail: string;
+  severity: NotificationSeverity;
+  status: NotificationStatus;
+  source: NotificationSource;
+  sourceLabel: string;
+  linkedProviderId?: string;
+  linkedConnectionId?: string;
+  linkedProviderLabel?: string;
+  linkedConnectionLabel?: string;
+  createdAt: string;
+  updatedAt: string;
+  activityEventIds: string[];
+  alertReviewItemIds: string[];
+  preferencePreviewIds: string[];
+}
 
 export type ConnectionState = HostStatus;
 

@@ -466,6 +466,10 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 
+.notification-actions {
+  grid-template-columns: repeat(auto-fit, minmax(8.75rem, 1fr));
+}
+
 .secret-card,
 .permission-group-card {
   gap: 0.7rem;
@@ -498,6 +502,33 @@ a {
 .secret-activity-list {
   display: grid;
   gap: 0.75rem;
+}
+
+.notification-card {
+  gap: 0.7rem;
+}
+
+.notification-card--unread {
+  border-color: var(--border-strong);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.notification-card--active {
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.16), var(--shadow);
+}
+
+.notification-card__meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.notification-detail {
+  gap: 1rem;
+}
+
+.notification-detail__grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
 
 .landing-shell {
@@ -996,7 +1027,7 @@ a {
   }
 
   .mobile-tab-nav__inner {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   .composer__actions {

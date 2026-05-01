@@ -7,9 +7,11 @@ export const ROUTES = {
   sessions: "/sessions",
   hosts: "/hosts",
   workflows: "/workflows",
+  notifications: "/notifications",
   settings: "/settings",
   settingsPermissions: "/settings/permissions",
   settingsSecrets: "/settings/secrets",
+  settingsNotifications: "/settings/notifications",
 } as const;
 
 export const DEFAULT_ROUTE = ROUTES.hub;
@@ -20,6 +22,7 @@ export const TAB_ROUTES = [
   ROUTES.sessions,
   ROUTES.hosts,
   ROUTES.workflows,
+  ROUTES.notifications,
   ROUTES.settings,
 ] as const;
 
@@ -29,6 +32,7 @@ export const TAB_NAV_ITEMS = [
   { label: "Sessions", href: ROUTES.sessions },
   { label: "Hosts", href: ROUTES.hosts },
   { label: "Workflows", href: ROUTES.workflows },
+  { label: "Alerts", href: ROUTES.notifications },
   { label: "Settings", href: ROUTES.settings },
 ] as const;
 
@@ -53,3 +57,6 @@ export const workflowRunsRoute = (workflowId: string) =>
 
 export const workflowRunDetailRoute = (workflowId: string, runId: string) =>
   `${workflowRunsRoute(workflowId)}/${runId}`;
+
+export const notificationDetailRoute = (notificationId: string) =>
+  `${ROUTES.notifications}/${notificationId}`;
