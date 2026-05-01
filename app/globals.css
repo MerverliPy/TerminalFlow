@@ -518,7 +518,11 @@ a {
 .health-category-grid,
 .health-finding-list,
 .health-action-grid,
-.health-preview-list {
+.health-preview-list,
+.preflight-gate-grid,
+.preflight-finding-grid,
+.preflight-action-grid,
+.preflight-action-preview-grid {
   display: grid;
   gap: 0.75rem;
 }
@@ -572,6 +576,76 @@ a {
 
 .health-action-grid {
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.preflight-gate-grid {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.preflight-checklist {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.preflight-check-category {
+  gap: 0.8rem;
+}
+
+.preflight-checklist__checks {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.preflight-check-card {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(5, 8, 22, 0.72);
+  padding: 0.85rem 0.9rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.preflight-check-card__meta,
+.preflight-check-category__meta {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.preflight-check-card__meta-item,
+.preflight-check-category__meta-item,
+.preflight-finding-card__note,
+.preflight-gate-card__note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.preflight-finding-grid {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.preflight-action-grid {
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+
+.preflight-action-button:disabled {
+  opacity: 0.82;
+}
+
+.preflight-summary-panel__grid {
+  align-items: stretch;
+}
+
+.preflight-safety-note {
+  border-radius: 1rem;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  background: rgba(5, 8, 22, 0.84);
+  padding: 0.95rem 1rem;
+  display: grid;
+  gap: 0.4rem;
 }
 
 .health-safety-note {

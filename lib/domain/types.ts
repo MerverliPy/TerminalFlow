@@ -66,6 +66,16 @@ export type AlertActionKind =
   | "escalate"
   | "open-provider";
 export type AlertActionMode = "disabled" | "simulated";
+export type ExecutionPreflightStatus = "ready" | "warning" | "blocked";
+export type ExecutionPreflightFindingSeverity = "info" | "warn" | "blocked";
+export type ExecutionPreflightActionKind =
+  | "approve-execution"
+  | "start-run"
+  | "override-block"
+  | "refresh-checks"
+  | "export-preflight-report";
+export type ExecutionPreflightActionMode = "disabled" | "preview";
+export type ExecutionPreflightCategoryKind = ReadinessCategoryKind;
 
 export interface IntegrationProviderCategory {
   id: string;
@@ -317,6 +327,76 @@ export interface ProjectHealthSummary {
   metricIds: string[];
   reviewId: string;
   note: string;
+}
+
+export interface ExecutionPreflightGate {
+  id: string;
+  kind: ExecutionPreflightCategoryKind;
+  title: string;
+  summary: string;
+  status: ExecutionPreflightStatus;
+  checkCategoryId: string;
+  findingIds: string[];
+  actionPreviewIds: string[];
+  note: string;
+}
+
+export interface ExecutionPreflightCheckCategory {
+  id: string;
+  gateId: string;
+  kind: ExecutionPreflightCategoryKind;
+  title: string;
+  summary: string;
+  status: ExecutionPreflightStatus;
+  checkIds: string[];
+  note: string;
+}
+
+export interface ExecutionPreflightCheck {
+  id: string;
+  categoryId: string;
+  label: string;
+  detail: string;
+  status: ExecutionPreflightStatus;
+  evidence: string;
+  preview: string;
+}
+
+export interface ExecutionPreflightFinding {
+  id: string;
+  gateId: string;
+  title: string;
+  detail: string;
+  severity: ExecutionPreflightFindingSeverity;
+  recommendation: string;
+}
+
+export interface ExecutionApprovalPreview {
+  id: string;
+  title: string;
+  summary: string;
+  detail: string;
+  status: ExecutionPreflightStatus;
+  note: string;
+}
+
+export interface ExecutionReadinessSnapshot {
+  id: string;
+  title: string;
+  summary: string;
+  updatedAt: string;
+  workflowLabel: string;
+  workspaceLabel: string;
+  hostLabel: string;
+  note: string;
+}
+
+export interface ExecutionGateActionPreview {
+  id: string;
+  kind: ExecutionPreflightActionKind;
+  label: string;
+  detail: string;
+  mode: ExecutionPreflightActionMode;
 }
 
 export interface TerminalSession {
