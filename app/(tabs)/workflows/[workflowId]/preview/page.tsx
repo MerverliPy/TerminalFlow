@@ -2,7 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MOCK_WORKFLOWS } from "@/lib/domain/mock-data";
-import { workflowDetailRoute, workflowRunsRoute } from "@/lib/navigation/routes";
+import {
+  workflowDetailRoute,
+  workflowPreflightRoute,
+  workflowRunsRoute,
+} from "@/lib/navigation/routes";
 
 export const dynamicParams = false;
 
@@ -34,6 +38,9 @@ export default async function WorkflowPreviewPage({
         <div className="workflow-builder__status">
           <Link className="settings-link" href={workflowDetailRoute(workflow.id)}>
             Open workflow
+          </Link>
+          <Link className="settings-link" href={workflowPreflightRoute(workflow.id)}>
+            Open preflight
           </Link>
           <Link className="settings-link" href={workflowRunsRoute(workflow.id)}>
             View run history

@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 14: Project health dashboard and readiness review UI.
+Phase 15: Execution readiness gate and preflight review UI.
 
 ## Hard constraints
 
