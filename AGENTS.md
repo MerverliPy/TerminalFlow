@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 04: Host connection setup and safety model UI.
+Phase 08: Persistence schema and local run store.
 
 ## Hard constraints
 
