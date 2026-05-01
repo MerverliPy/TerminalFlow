@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 02: Navigation, domain model, and static workspace surfaces.
+Phase 03: Static session detail and command composer UI.
 
 ## Hard constraints
 
