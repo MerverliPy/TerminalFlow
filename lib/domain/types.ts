@@ -750,6 +750,109 @@ export interface SimulatedCommandResult {
   blockedReason?: string;
 }
 
+export type LocalAuditEventCategory =
+  | "workspace"
+  | "workflow"
+  | "run-simulation"
+  | "storage"
+  | "permissions"
+  | "secrets"
+  | "integrations"
+  | "notifications"
+  | "readiness"
+  | "preflight";
+export type LocalAuditEventSeverity = "info" | "warn" | "high" | "critical";
+export type LocalAuditEventStatus = "new" | "acknowledged" | "resolved" | "restored";
+
+export interface LocalAuditActor {
+  id: string;
+  label: string;
+  role: string;
+  source: "local-user" | "local-system" | "mock-reviewer";
+}
+
+export interface LocalAuditResource {
+  id: string;
+  label: string;
+  type: string;
+  route: string;
+  workspace: string;
+}
+
+export interface LocalChangeSet {
+  id: string;
+  field: string;
+  before: string;
+  after: string;
+}
+
+export interface LocalChangeHistoryEntry {
+  id: string;
+  eventId: string;
+  title: string;
+  changedAt: string;
+  summary: string;
+  changeSet: LocalChangeSet[];
+}
+
+export interface LocalAuditTimelineItem {
+  id: string;
+  eventId: string;
+  time: string;
+  title: string;
+  detail: string;
+  status: LocalAuditEventStatus;
+}
+
+export interface LocalAuditActionPreview {
+  id: string;
+  kind: "export-audit-log" | "clear-history" | "restore-event" | "acknowledge-event" | "open-resource";
+  label: string;
+  detail: string;
+  mode: "disabled" | "local-preview";
+}
+
+export interface LocalAuditFilterPreview {
+  id: string;
+  label: string;
+  kind: "search" | "category" | "severity" | "status" | "actor";
+  value: string;
+  note: string;
+}
+
+export interface LocalAuditStorageStatus {
+  state: "local-static" | "browser-local";
+  eventCount: number;
+  changeHistoryCount: number;
+  timelineCount: number;
+  lastUpdatedAt: string;
+  note: string;
+}
+
+export interface LocalAuditCategorySummary {
+  id: string;
+  category: LocalAuditEventCategory;
+  title: string;
+  summary: string;
+  count: number;
+}
+
+export interface LocalAuditEvent {
+  id: string;
+  title: string;
+  summary: string;
+  detail: string;
+  category: LocalAuditEventCategory;
+  severity: LocalAuditEventSeverity;
+  status: LocalAuditEventStatus;
+  occurredAt: string;
+  actor: LocalAuditActor;
+  resource: LocalAuditResource;
+  timelineItemIds: string[];
+  changeHistoryEntryIds: string[];
+  actionPreviewIds: string[];
+}
+
 export type {
   AuthState,
   MockAuthSession,

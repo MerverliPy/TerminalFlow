@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { AccountPanel } from "@/components/settings/account-panel";
+import { AuditSummaryPanel } from "@/components/settings/audit-summary-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
 import { LocalSimulationStoragePanel } from "@/components/settings/local-simulation-storage-panel";
 import { NotificationPreferencesPanel } from "@/components/settings/notification-preferences-panel";
@@ -10,6 +11,7 @@ import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel"
 import { StorageStatusPanel } from "@/components/settings/storage-status-panel";
 import {
   MOCK_NOTIFICATION_PREFERENCE_PREVIEWS,
+  MOCK_LOCAL_AUDIT_STORAGE_STATUS,
   MOCK_PROJECT_HEALTH_SUMMARY,
   MOCK_READINESS_REVIEW,
   MOCK_READINESS_SCORES,
@@ -57,6 +59,7 @@ export default function SettingsPage() {
       <AccountPanel />
       <WorkspaceBoundaryPanel />
       <StorageStatusPanel />
+      <AuditSummaryPanel status={MOCK_LOCAL_AUDIT_STORAGE_STATUS} />
       <LocalSimulationStoragePanel />
       <ResetDemoDataPanel />
       <ReadinessReviewPanel
@@ -84,6 +87,9 @@ export default function SettingsPage() {
         </Link>
         <Link className="settings-link" href={ROUTES.settingsPermissions}>
           Open Workspace Permissions
+        </Link>
+        <Link className="settings-link" href={ROUTES.settingsAudit}>
+          Open Audit Trail
         </Link>
         <Link className="settings-link" href={ROUTES.settingsSecrets}>
           Open Secrets Vault

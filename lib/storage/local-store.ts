@@ -2,6 +2,11 @@ import { LOCAL_STORE_KEY, createEmptyLocalStoreSnapshot } from "@/lib/storage/sc
 import { migrateLocalStoreSnapshot } from "@/lib/storage/migrations";
 import { createLocalStoreSeed } from "@/lib/storage/seed";
 import type {
+  LocalAuditEvent,
+  LocalAuditTimelineItem,
+  LocalChangeHistoryEntry,
+} from "@/lib/domain/types";
+import type {
   LocalStoreCollection,
   LocalStoreSnapshot,
   LocalStoreStatus,
@@ -57,6 +62,9 @@ function countCollections(snapshot: LocalStoreSnapshot): Record<LocalStoreCollec
     simulationReplaySessions: snapshot.collections.simulationReplaySessions.length,
     simulationComparisons: snapshot.collections.simulationComparisons.length,
     simulationComparisonFindings: snapshot.collections.simulationComparisonFindings.length,
+    auditEvents: snapshot.collections.auditEvents.length,
+    auditTimelineItems: snapshot.collections.auditTimelineItems.length,
+    changeHistoryEntries: snapshot.collections.changeHistoryEntries.length,
     commandSimulationHistoryBySessionId: Object.keys(
       snapshot.collections.commandSimulationHistoryBySessionId,
     ).length,
@@ -137,6 +145,9 @@ export function getLocalStoreSummary(): LocalStoreSummary {
         simulationReplaySessions: 0,
         simulationComparisons: 0,
         simulationComparisonFindings: 0,
+        auditEvents: 0,
+        auditTimelineItems: 0,
+        changeHistoryEntries: 0,
         commandSimulationHistoryBySessionId: 0,
         commandDraftBySessionId: 0,
       },
@@ -231,6 +242,22 @@ export function getPersistedSimulationComparisons(): SimulationComparison[] {
 
 export function getPersistedSimulationComparisonFindings(): SimulationComparisonFinding[] {
   return getLocalStoreSnapshot().collections.simulationComparisonFindings;
+}
+
+export function getPersistedAuditEvents(): LocalAuditEvent[] {
+  return getLocalStoreSnapshot().collections.auditEvents;
+}
+
+export function getPersistedAuditEvent(eventId: string): LocalAuditEvent | undefined {
+  return getPersistedAuditEvents().find((event) => event.id === eventId);
+}
+
+export function getPersistedAuditTimelineItems(): LocalAuditTimelineItem[] {
+  return getLocalStoreSnapshot().collections.auditTimelineItems;
+}
+
+export function getPersistedChangeHistoryEntries(): LocalChangeHistoryEntry[] {
+  return getLocalStoreSnapshot().collections.changeHistoryEntries;
 }
 
 export function getLocalSimulationStorageStatus(): LocalSimulationStorageStatus {
