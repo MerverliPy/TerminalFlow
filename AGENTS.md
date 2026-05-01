@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 20: Local release notes and milestone review UI.
+Phase 20A: UI optimization, visual hierarchy, and chat-first terminal polish.
 
 ## Hard constraints
 
