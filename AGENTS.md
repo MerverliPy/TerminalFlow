@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 03: Static session detail and command composer UI.
+Phase 04: Host connection setup and safety model UI.
 
 ## Hard constraints
 

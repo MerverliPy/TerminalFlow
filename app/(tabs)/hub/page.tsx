@@ -50,10 +50,10 @@ export default function HubPage() {
                     ? "workspace-pill--good"
                     : host.status === "connecting"
                       ? "workspace-pill--accent"
-                      : "workspace-pill--warn"
+                    : "workspace-pill--warn"
                 }`}
               >
-                {host.name} · {host.host} · {host.platform}
+                {host.name} · {host.host} · {host.operatingSystem}
               </span>
             ))}
           </div>
