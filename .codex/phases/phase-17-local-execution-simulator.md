@@ -1,6 +1,6 @@
 # Phase 17 — Local Execution Simulator and Controlled Run State UI
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -164,4 +164,9 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented a local-only execution simulator on the workflow run surface with seeded scenarios, controlled local state transitions, progress rendering, log append behavior, and simulator safety copy.
+
+Validation:
+
+- `npm run typecheck`
+- Result: passed

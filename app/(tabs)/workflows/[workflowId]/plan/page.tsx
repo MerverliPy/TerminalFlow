@@ -16,12 +16,14 @@ import {
   MOCK_LOCAL_EXECUTION_PLAN_STEPS,
   MOCK_LOCAL_EXECUTION_PLAN_DEPENDENCIES,
   MOCK_LOCAL_EXECUTION_PLANS,
+  MOCK_WORKFLOW_RUNS,
   MOCK_WORKFLOWS,
 } from "@/lib/domain/mock-data";
 import {
   ROUTES,
   workflowDetailRoute,
   workflowPreflightRoute,
+  workflowRunDetailRoute,
   workflowRunsRoute,
 } from "@/lib/navigation/routes";
 
@@ -39,6 +41,7 @@ export default async function WorkflowPlanPage({
   const { workflowId } = await params;
   const workflow = MOCK_WORKFLOWS.find((item) => item.id === workflowId);
   const plan = MOCK_LOCAL_EXECUTION_PLANS.find((item) => item.workflowId === workflowId);
+  const run = MOCK_WORKFLOW_RUNS.find((item) => item.workflowId === workflowId);
 
   if (!workflow || !plan) {
     notFound();
@@ -81,6 +84,11 @@ export default async function WorkflowPlanPage({
           <Link className="settings-link" href={workflowRunsRoute(workflow.id)}>
             View run history
           </Link>
+          {run ? (
+            <Link className="settings-link" href={workflowRunDetailRoute(workflow.id, run.id)}>
+              Open simulator
+            </Link>
+          ) : null}
         </div>
       </section>
 
