@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 09: Auth and user workspace boundary.
+Phase 10: Workspace permissions and access review UI.
 
 ## Hard constraints
 
