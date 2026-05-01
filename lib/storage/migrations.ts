@@ -34,6 +34,18 @@ export const LOCAL_STORE_MIGRATIONS: LocalStoreMigration[] = [
             snapshot.collections.simulationComparisonFindings?.length > 0
               ? snapshot.collections.simulationComparisonFindings
               : seed.collections.simulationComparisonFindings,
+          auditEvents:
+            snapshot.collections.auditEvents?.length > 0
+              ? snapshot.collections.auditEvents
+              : seed.collections.auditEvents,
+          auditTimelineItems:
+            snapshot.collections.auditTimelineItems?.length > 0
+              ? snapshot.collections.auditTimelineItems
+              : seed.collections.auditTimelineItems,
+          changeHistoryEntries:
+            snapshot.collections.changeHistoryEntries?.length > 0
+              ? snapshot.collections.changeHistoryEntries
+              : seed.collections.changeHistoryEntries,
         },
       };
     },

@@ -24,6 +24,9 @@ const INITIAL_SUMMARY: LocalStoreSummary = {
     simulationReplaySessions: 0,
     simulationComparisons: 0,
     simulationComparisonFindings: 0,
+    auditEvents: 0,
+    auditTimelineItems: 0,
+    changeHistoryEntries: 0,
     commandSimulationHistoryBySessionId: 0,
     commandDraftBySessionId: 0,
   },
@@ -126,6 +129,16 @@ export function StorageStatusPanel() {
           <span className="settings-card__label">Command drafts</span>
           <span className="settings-card__title">{summary.counts.commandDraftBySessionId}</span>
           <p className="card-copy">Stored locally by session for browser restore.</p>
+        </article>
+        <article className="settings-card">
+          <span className="settings-card__label">Audit events</span>
+          <span className="settings-card__title">{summary.counts.auditEvents}</span>
+          <p className="card-copy">Mock audit event records in browser-local data.</p>
+        </article>
+        <article className="settings-card">
+          <span className="settings-card__label">Audit timeline items</span>
+          <span className="settings-card__title">{summary.counts.auditTimelineItems}</span>
+          <p className="card-copy">Ordered local-only timeline entries for audit review.</p>
         </article>
       </div>
     </section>

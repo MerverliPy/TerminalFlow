@@ -1,4 +1,7 @@
 import type {
+  LocalAuditEvent,
+  LocalAuditTimelineItem,
+  LocalChangeHistoryEntry,
   SimulatedRunLifecycleStatus,
   SimulatedRunLogEntry,
   SimulatedRunStep,
@@ -22,6 +25,9 @@ export type LocalStoreCollection =
   | "simulationReplaySessions"
   | "simulationComparisons"
   | "simulationComparisonFindings"
+  | "auditEvents"
+  | "auditTimelineItems"
+  | "changeHistoryEntries"
   | "commandSimulationHistoryBySessionId"
   | "commandDraftBySessionId";
 
@@ -179,6 +185,9 @@ export interface LocalStoreCollections {
   simulationReplaySessions: SimulationReplaySession[];
   simulationComparisons: SimulationComparison[];
   simulationComparisonFindings: SimulationComparisonFinding[];
+  auditEvents: LocalAuditEvent[];
+  auditTimelineItems: LocalAuditTimelineItem[];
+  changeHistoryEntries: LocalChangeHistoryEntry[];
   commandSimulationHistoryBySessionId: Record<string, PersistedSimulatedCommandResult[]>;
   commandDraftBySessionId: Record<string, string>;
 }

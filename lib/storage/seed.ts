@@ -1,5 +1,8 @@
 import {
   MOCK_COMMAND_ENTRIES,
+  MOCK_LOCAL_AUDIT_EVENTS,
+  MOCK_LOCAL_AUDIT_TIMELINE_ITEMS,
+  MOCK_LOCAL_CHANGE_HISTORY_ENTRIES,
   MOCK_PROJECTS,
   MOCK_SESSIONS,
   MOCK_LOCAL_EXECUTION_SIMULATOR,
@@ -480,6 +483,9 @@ export function createLocalStoreSeed(): LocalStoreSnapshot {
       simulationReplaySessions: savedSimulations.simulationReplaySessions,
       simulationComparisons: savedSimulations.simulationComparisons,
       simulationComparisonFindings: savedSimulations.simulationComparisonFindings,
+      auditEvents: MOCK_LOCAL_AUDIT_EVENTS,
+      auditTimelineItems: MOCK_LOCAL_AUDIT_TIMELINE_ITEMS,
+      changeHistoryEntries: MOCK_LOCAL_CHANGE_HISTORY_ENTRIES,
       commandSimulationHistoryBySessionId: Object.fromEntries(
         MOCK_SESSIONS.map((session) => {
           const result = buildSeedResult(session.commandPreview, session.id, session.startedAt);
