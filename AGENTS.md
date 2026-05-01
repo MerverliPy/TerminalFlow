@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 18: Local run persistence and simulation replay UI.
+Phase 19: Local audit trail and change history UI.
 
 ## Hard constraints
 
