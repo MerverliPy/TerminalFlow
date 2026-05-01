@@ -52,6 +52,7 @@ export const WORKFLOW_DETAIL_ROUTE = "/workflows/[workflowId]";
 export const WORKFLOW_RUNS_ROUTE = "/workflows/[workflowId]/runs";
 export const WORKFLOW_RUN_DETAIL_ROUTE = "/workflows/[workflowId]/runs/[runId]";
 export const WORKFLOW_PREFLIGHT_ROUTE = "/workflows/[workflowId]/preflight";
+export const WORKFLOW_PLAN_ROUTE = "/workflows/[workflowId]/plan";
 
 export const workflowDetailRoute = (workflowId: string) =>
   `${ROUTES.workflows}/${workflowId}`;
@@ -64,6 +65,9 @@ export const workflowRunDetailRoute = (workflowId: string, runId: string) =>
 
 export const workflowPreflightRoute = (workflowId: string) =>
   `${workflowDetailRoute(workflowId)}/preflight`;
+
+export const workflowPlanRoute = (workflowId: string) =>
+  `${workflowDetailRoute(workflowId)}/plan`;
 
 export const notificationDetailRoute = (notificationId: string) =>
   `${ROUTES.notifications}/${notificationId}`;

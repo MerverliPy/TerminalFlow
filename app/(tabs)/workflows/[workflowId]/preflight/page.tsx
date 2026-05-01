@@ -14,6 +14,7 @@ import {
 } from "@/lib/domain/mock-data";
 import {
   ROUTES,
+  workflowPlanRoute,
   workflowDetailRoute,
   workflowRunsRoute,
 } from "@/lib/navigation/routes";
@@ -50,6 +51,9 @@ export default async function WorkflowPreflightPage({
           </Link>
           <Link className="settings-link" href={workflowDetailRoute(workflow.id)}>
             Open workflow
+          </Link>
+          <Link className="settings-link" href={workflowPlanRoute(workflow.id)}>
+            Open plan
           </Link>
           <Link className="settings-link" href={workflowRunsRoute(workflow.id)}>
             View run history
