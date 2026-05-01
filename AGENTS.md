@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 16: Local execution plan builder and dry-run summary UI.
+Phase 17: Local execution simulator and controlled run state UI.
 
 ## Hard constraints
 
