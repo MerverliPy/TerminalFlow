@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 01: Bootstrap a runnable shell and routing foundation.
+Phase 03: Static session detail and command composer UI.
 
 ## Hard constraints
 

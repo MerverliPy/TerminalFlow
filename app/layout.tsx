@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "TerminalFlow",
-  description: "Mobile-first shell for terminal-driven workflows.",
+  description: "Mobile-first control plane for static terminal workflow surfaces.",
 };
 
 export default function RootLayout({

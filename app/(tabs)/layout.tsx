@@ -1,14 +1,6 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { ROUTES } from "@/lib/navigation/routes";
-
-const NAV_ITEMS = [
-  {
-    label: "Hub",
-    href: ROUTES.hub,
-  },
-] as const;
+import { MobileTabNav } from "@/components/shell/mobile-tab-nav";
 
 export default function TabsLayout({
   children,
@@ -21,26 +13,15 @@ export default function TabsLayout({
         <header className="shell__bar">
           <div className="brand">
             <span className="brand__eyebrow">TerminalFlow</span>
-            <span className="brand__name">Mobile control plane</span>
+            <span className="brand__name">Static workspace control plane</span>
           </div>
-          <div className="status">Local shell ready</div>
+          <div className="status">Local data only</div>
         </header>
 
         {children}
-
-        <nav className="shell__dock" aria-label="Primary">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              className="dock-link dock-link--active"
-              href={item.href}
-              aria-current="page"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
       </div>
+
+      <MobileTabNav />
     </div>
   );
 }
