@@ -3,7 +3,7 @@ import type { LocalStoreSchema, LocalStoreSnapshot } from "@/lib/storage/storage
 export const LOCAL_STORE_KEY = "terminalflow.local-store.v1";
 
 export const LOCAL_STORE_SCHEMA: LocalStoreSchema = {
-  version: 1,
+  version: 2,
 } as const;
 
 export function createEmptyLocalStoreSnapshot(): LocalStoreSnapshot {
@@ -17,6 +17,10 @@ export function createEmptyLocalStoreSnapshot(): LocalStoreSnapshot {
       workflowRuns: [],
       workflowRunLogs: [],
       simulatedCommandResults: [],
+      savedSimulationRuns: [],
+      simulationReplaySessions: [],
+      simulationComparisons: [],
+      simulationComparisonFindings: [],
       commandSimulationHistoryBySessionId: {},
       commandDraftBySessionId: {},
     },

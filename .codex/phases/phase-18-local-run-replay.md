@@ -1,6 +1,6 @@
 # Phase 18 — Local Run Persistence and Simulation Replay UI
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -171,4 +171,4 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented local-only saved simulation snapshots, replay sessions, replay frames, comparison findings, and browser-storage controls across workflow runs, replay, compare, and settings surfaces. Validation evidence: `npm run typecheck` passed on 2026-05-01.

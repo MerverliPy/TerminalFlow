@@ -6,7 +6,12 @@ import type {
   LocalStoreSnapshot,
   LocalStoreStatus,
   LocalStoreSummary,
+  LocalSimulationStorageStatus,
+  PersistedSimulationRunSnapshot,
   PersistedSimulatedCommandResult,
+  SimulationComparison,
+  SimulationComparisonFinding,
+  SimulationReplaySession,
 } from "@/lib/storage/storage-types";
 
 function hasBrowserStorage() {
@@ -48,6 +53,10 @@ function countCollections(snapshot: LocalStoreSnapshot): Record<LocalStoreCollec
     workflowRuns: snapshot.collections.workflowRuns.length,
     workflowRunLogs: snapshot.collections.workflowRunLogs.length,
     simulatedCommandResults: snapshot.collections.simulatedCommandResults.length,
+    savedSimulationRuns: snapshot.collections.savedSimulationRuns.length,
+    simulationReplaySessions: snapshot.collections.simulationReplaySessions.length,
+    simulationComparisons: snapshot.collections.simulationComparisons.length,
+    simulationComparisonFindings: snapshot.collections.simulationComparisonFindings.length,
     commandSimulationHistoryBySessionId: Object.keys(
       snapshot.collections.commandSimulationHistoryBySessionId,
     ).length,
@@ -89,7 +98,7 @@ export function getLocalStoreSnapshot(): LocalStoreSnapshot {
 export function saveLocalStoreSnapshot(snapshot: LocalStoreSnapshot): LocalStoreSnapshot {
   const nextSnapshot = {
     ...snapshot,
-    version: 1 as const,
+    version: 2 as const,
     updatedAt: new Date().toISOString(),
   };
 
@@ -115,7 +124,7 @@ export function getLocalStoreSummary(): LocalStoreSummary {
   if (!snapshot) {
     return {
       status: "unavailable",
-      version: 1,
+      version: 2,
       updatedAt: null,
       counts: {
         projects: 0,
@@ -124,6 +133,10 @@ export function getLocalStoreSummary(): LocalStoreSummary {
         workflowRuns: 0,
         workflowRunLogs: 0,
         simulatedCommandResults: 0,
+        savedSimulationRuns: 0,
+        simulationReplaySessions: 0,
+        simulationComparisons: 0,
+        simulationComparisonFindings: 0,
         commandSimulationHistoryBySessionId: 0,
         commandDraftBySessionId: 0,
       },
@@ -198,6 +211,122 @@ export function getSessionCommandResults(sessionId: string): PersistedSimulatedC
 
 export function getPersistedSimulatedCommandResults() {
   return getLocalStoreSnapshot().collections.simulatedCommandResults;
+}
+
+export function getPersistedSavedSimulationRuns(): PersistedSimulationRunSnapshot[] {
+  return getLocalStoreSnapshot().collections.savedSimulationRuns;
+}
+
+export function getPersistedSavedSimulationRun(runId: string) {
+  return getPersistedSavedSimulationRuns().find((run) => run.id === runId);
+}
+
+export function getPersistedSimulationReplaySessions(): SimulationReplaySession[] {
+  return getLocalStoreSnapshot().collections.simulationReplaySessions;
+}
+
+export function getPersistedSimulationComparisons(): SimulationComparison[] {
+  return getLocalStoreSnapshot().collections.simulationComparisons;
+}
+
+export function getPersistedSimulationComparisonFindings(): SimulationComparisonFinding[] {
+  return getLocalStoreSnapshot().collections.simulationComparisonFindings;
+}
+
+export function getLocalSimulationStorageStatus(): LocalSimulationStorageStatus {
+  const summary = getLocalStoreSummary();
+
+  return {
+    state: summary.status,
+    snapshotCount: summary.counts.savedSimulationRuns,
+    replaySessionCount: summary.counts.simulationReplaySessions,
+    comparisonCount: summary.counts.simulationComparisons,
+    comparisonFindingCount: summary.counts.simulationComparisonFindings,
+    lastUpdatedAt: summary.updatedAt,
+    note:
+      summary.counts.savedSimulationRuns === 0
+        ? "No saved simulation snapshots are stored yet."
+        : "Saved simulation snapshots, replay sessions, and comparisons are stored locally on this device.",
+  };
+}
+
+function updateSimulationCollections(
+  updater: (collections: LocalStoreSnapshot["collections"]) => LocalStoreSnapshot["collections"],
+) {
+  const snapshot = getLocalStoreSnapshot();
+  const nextSnapshot: LocalStoreSnapshot = {
+    ...snapshot,
+    collections: updater(snapshot.collections),
+  };
+
+  return saveLocalStoreSnapshot(nextSnapshot);
+}
+
+export function savePersistedSimulationRunSnapshot(
+  run: PersistedSimulationRunSnapshot,
+): LocalStoreSnapshot {
+  return updateSimulationCollections((collections) => {
+    const nextRuns = collections.savedSimulationRuns.filter((item) => item.id !== run.id);
+    return {
+      ...collections,
+      savedSimulationRuns: [run, ...nextRuns],
+    };
+  });
+}
+
+export function saveSimulationReplaySession(session: SimulationReplaySession): LocalStoreSnapshot {
+  return updateSimulationCollections((collections) => {
+    const nextSessions = collections.simulationReplaySessions.filter((item) => item.id !== session.id);
+    return {
+      ...collections,
+      simulationReplaySessions: [session, ...nextSessions],
+    };
+  });
+}
+
+export function saveSimulationComparison(comparison: SimulationComparison): LocalStoreSnapshot {
+  return updateSimulationCollections((collections) => {
+    const nextComparisons = collections.simulationComparisons.filter((item) => item.id !== comparison.id);
+    return {
+      ...collections,
+      simulationComparisons: [comparison, ...nextComparisons],
+    };
+  });
+}
+
+export function saveSimulationComparisonFindings(
+  findings: SimulationComparisonFinding[],
+): LocalStoreSnapshot {
+  return updateSimulationCollections((collections) => {
+    const existing = collections.simulationComparisonFindings.filter(
+      (item) => !findings.some((finding) => finding.id === item.id),
+    );
+    return {
+      ...collections,
+      simulationComparisonFindings: [...findings, ...existing],
+    };
+  });
+}
+
+export function clearSavedSimulationRuns(): LocalStoreSnapshot {
+  return updateSimulationCollections((collections) => ({
+    ...collections,
+    savedSimulationRuns: [],
+    simulationReplaySessions: [],
+    simulationComparisons: [],
+    simulationComparisonFindings: [],
+  }));
+}
+
+export function resetSavedSimulationRuns(): LocalStoreSnapshot {
+  const seed = createLocalStoreSeed();
+  return updateSimulationCollections((collections) => ({
+    ...collections,
+    savedSimulationRuns: seed.collections.savedSimulationRuns,
+    simulationReplaySessions: seed.collections.simulationReplaySessions,
+    simulationComparisons: seed.collections.simulationComparisons,
+    simulationComparisonFindings: seed.collections.simulationComparisonFindings,
+  }));
 }
 
 export function saveSessionCommandDraft(sessionId: string, draft: string): LocalStoreSnapshot {
