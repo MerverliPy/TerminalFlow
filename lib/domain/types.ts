@@ -1,5 +1,23 @@
 export type HostStatus = "connected" | "connecting" | "offline";
 export type ProjectHealth = "ready" | "attention";
+export type ReadinessStatus = "ready" | "watch" | "blocked";
+export type ReadinessFindingSeverity = "info" | "warn" | "blocked";
+export type ReadinessActionKind =
+  | "fix"
+  | "run-audit"
+  | "refresh-checks"
+  | "export-report"
+  | "open-issue";
+export type ReadinessActionMode = "disabled" | "preview";
+export type ReadinessCategoryKind =
+  | "workspace"
+  | "project"
+  | "host"
+  | "workflow"
+  | "integration"
+  | "secrets"
+  | "notification";
+export type HealthDashboardMetricTone = "good" | "warn" | "accent";
 export type SessionStatus = "running" | "idle" | "paused";
 export type SessionState = SessionStatus;
 export type CommandStatus = "completed" | "queued" | "draft" | "blocked";
@@ -35,6 +53,19 @@ export type IntegrationActionKind =
   | "authorize"
   | "revoke";
 export type IntegrationActionMode = "disabled" | "simulated";
+export type NotificationSeverity = "low" | "medium" | "high" | "critical";
+export type NotificationStatus = "unread" | "read" | "snoozed" | "resolved" | "archived";
+export type NotificationSource = "integration" | "workspace" | "system" | "review";
+export type NotificationActivityEventKind = "received" | "reviewed" | "status-changed" | "escalated" | "archived";
+export type AlertReviewStatus = "open" | "reviewing" | "escalated" | "resolved";
+export type AlertActionKind =
+  | "mark-read"
+  | "snooze"
+  | "resolve"
+  | "archive"
+  | "escalate"
+  | "open-provider";
+export type AlertActionMode = "disabled" | "simulated";
 
 export interface IntegrationProviderCategory {
   id: string;
@@ -50,6 +81,46 @@ export interface IntegrationPermissionScope {
   summary: string;
   preview: string;
   riskNote: string;
+}
+
+export interface IntegrationProvider {
+  id: string;
+  categoryId: string;
+  name: string;
+  summary: string;
+  detail: string;
+  workspaceNote: string;
+  reviewSummary: string;
+  connectionSummary: string;
+  riskLevel: IntegrationRiskLevel;
+  scopeIds: string[];
+}
+
+export interface IntegrationConnection {
+  id: string;
+  providerId: string;
+  status: IntegrationConnectionStatus;
+  lastCheckedAt: string;
+  lastActivityAt: string;
+  riskNote: string;
+  findingIds: string[];
+  activityEventIds: string[];
+  actionPreviewIds: string[];
+}
+
+export interface IntegrationActionPreview {
+  id: string;
+  kind: IntegrationActionKind;
+  label: string;
+  detail: string;
+  mode: IntegrationActionMode;
+}
+
+export interface IntegrationStatusSummary {
+  totalProviders: number;
+  totalCategories: number;
+  totalScopes: number;
+  totalConnections: number;
 }
 
 export interface IntegrationReviewFinding {
@@ -73,6 +144,41 @@ export interface NotificationPreferencePreview {
   summary: string;
   enabled: boolean;
   note: string;
+}
+
+export interface NotificationCategory {
+  id: string;
+  title: string;
+  summary: string;
+  source: NotificationSource;
+  note: string;
+}
+
+export interface NotificationActivityEvent {
+  id: string;
+  time: string;
+  kind: NotificationActivityEventKind;
+  title: string;
+  detail: string;
+}
+
+export interface AlertReviewItem {
+  id: string;
+  notificationId: string;
+  title: string;
+  summary: string;
+  status: AlertReviewStatus;
+  severity: "low" | "medium" | "high";
+  detail: string;
+  recommendation: string;
+}
+
+export interface AlertActionPreview {
+  id: string;
+  kind: AlertActionKind;
+  label: string;
+  detail: string;
+  mode: AlertActionMode;
 }
 
 export interface Notification {
@@ -128,6 +234,89 @@ export interface Project {
   health: ProjectHealth;
   updatedAt: string;
   openFiles: number;
+}
+
+export interface HealthDashboardMetric {
+  id: string;
+  label: string;
+  value: string;
+  detail: string;
+  tone: HealthDashboardMetricTone;
+}
+
+export interface ReadinessScore {
+  id: string;
+  label: string;
+  score: number;
+  status: ReadinessStatus;
+  detail: string;
+  note: string;
+}
+
+export interface ReadinessFinding {
+  id: string;
+  categoryId: string;
+  title: string;
+  detail: string;
+  severity: ReadinessFindingSeverity;
+  preview: string;
+}
+
+export interface ReadinessCategory {
+  id: string;
+  kind: ReadinessCategoryKind;
+  title: string;
+  summary: string;
+  status: ReadinessStatus;
+  scoreId: string;
+  findingIds: string[];
+  actionPreviewIds: string[];
+  note: string;
+}
+
+export interface ReadinessActionPreview {
+  id: string;
+  kind: ReadinessActionKind;
+  label: string;
+  detail: string;
+  mode: ReadinessActionMode;
+}
+
+export interface WorkspaceReadinessSnapshot {
+  id: string;
+  title: string;
+  summary: string;
+  status: ReadinessStatus;
+  projectCount: number;
+  hostCount: number;
+  workflowCount: number;
+  integrationCount: number;
+  secretCount: number;
+  notificationCount: number;
+  note: string;
+}
+
+export interface ReadinessReview {
+  id: string;
+  title: string;
+  summary: string;
+  updatedAt: string;
+  workspaceSnapshotId: string;
+  scoreIds: string[];
+  categoryIds: string[];
+  findingIds: string[];
+  actionPreviewIds: string[];
+}
+
+export interface ProjectHealthSummary {
+  id: string;
+  title: string;
+  summary: string;
+  updatedAt: string;
+  overallScoreId: string;
+  metricIds: string[];
+  reviewId: string;
+  note: string;
 }
 
 export interface TerminalSession {

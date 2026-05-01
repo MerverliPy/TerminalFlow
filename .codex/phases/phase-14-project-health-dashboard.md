@@ -1,6 +1,6 @@
 # Phase 14 — Project Health Dashboard and Readiness Review UI
 
-Status: pending
+Status: completed
 
 ## Goal
 
@@ -166,4 +166,9 @@ Use:
 
 ## Completion summary
 
-Pending.
+Implemented a local-only project health and readiness dashboard with typed mock readiness models, scorecards, category panels, workspace summary, findings, disabled action previews, a dedicated Health tab route, and a Settings readiness review panel.
+
+Validation:
+
+- `npm run typecheck`
+- Result: passed

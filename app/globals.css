@@ -296,6 +296,11 @@ a {
   color: #bae6fd;
 }
 
+.workspace-pill--blocked {
+  border-color: rgba(248, 113, 113, 0.32);
+  color: #fecaca;
+}
+
 .card {
   border-radius: 1rem;
   border: 1px solid var(--border);
@@ -472,6 +477,121 @@ a {
 
 .integration-actions {
   grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
+.health-dashboard {
+  gap: 0.9rem;
+}
+
+.health-hero {
+  border-radius: 1.35rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(160deg, rgba(15, 23, 42, 0.96), rgba(8, 13, 26, 0.94)),
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 32%);
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.health-hero__copy,
+.health-hero__aside {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.health-hero__title {
+  margin: 0;
+  font-size: clamp(1.3rem, 4.2vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.health-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.health-metric-strip,
+.health-snapshot-grid,
+.health-category-grid,
+.health-finding-list,
+.health-action-grid,
+.health-preview-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.health-metric-strip {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.health-snapshot-grid {
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+
+.readiness-score-card {
+  gap: 0.55rem;
+}
+
+.readiness-score-card__header,
+.readiness-category-panel__score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.readiness-score-card__value {
+  font-size: 1.65rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+.readiness-score-card__note,
+.readiness-finding-card__preview,
+.readiness-category-panel__score-label {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.readiness-category-panel {
+  gap: 0.8rem;
+}
+
+.health-category-grid {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.health-finding-list {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.health-action-grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.health-safety-note {
+  border-radius: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(5, 8, 22, 0.84);
+  padding: 0.95rem 1rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.readiness-review-panel {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.readiness-review-panel__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .secret-card,
@@ -1037,7 +1157,7 @@ a {
   }
 
   .mobile-tab-nav__inner {
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
   .composer__actions {
@@ -1061,5 +1181,10 @@ a {
 
   .sim-result__outputs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .health-hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    align-items: start;
   }
 }

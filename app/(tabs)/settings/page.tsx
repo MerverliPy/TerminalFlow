@@ -3,10 +3,16 @@ import Link from "next/link";
 import { AccountPanel } from "@/components/settings/account-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
 import { NotificationPreferencesPanel } from "@/components/settings/notification-preferences-panel";
+import { ReadinessReviewPanel } from "@/components/settings/readiness-review-panel";
 import { WorkspaceBoundaryPanel } from "@/components/settings/workspace-boundary-panel";
 import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel";
 import { StorageStatusPanel } from "@/components/settings/storage-status-panel";
-import { MOCK_NOTIFICATION_PREFERENCE_PREVIEWS } from "@/lib/domain/mock-data";
+import {
+  MOCK_NOTIFICATION_PREFERENCE_PREVIEWS,
+  MOCK_PROJECT_HEALTH_SUMMARY,
+  MOCK_READINESS_REVIEW,
+  MOCK_READINESS_SCORES,
+} from "@/lib/domain/mock-data";
 import { ROUTES } from "@/lib/navigation/routes";
 
 const SETTINGS_GROUPS = [
@@ -51,6 +57,11 @@ export default function SettingsPage() {
       <WorkspaceBoundaryPanel />
       <StorageStatusPanel />
       <ResetDemoDataPanel />
+      <ReadinessReviewPanel
+        review={MOCK_READINESS_REVIEW}
+        score={MOCK_READINESS_SCORES[0]}
+        summary={MOCK_PROJECT_HEALTH_SUMMARY}
+      />
       <LocalDataSafetyNote />
 
       <section className="shell__section">
