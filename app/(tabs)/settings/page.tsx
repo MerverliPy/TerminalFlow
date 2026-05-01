@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AccountPanel } from "@/components/settings/account-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
+import { LocalSimulationStoragePanel } from "@/components/settings/local-simulation-storage-panel";
 import { NotificationPreferencesPanel } from "@/components/settings/notification-preferences-panel";
 import { ReadinessReviewPanel } from "@/components/settings/readiness-review-panel";
 import { WorkspaceBoundaryPanel } from "@/components/settings/workspace-boundary-panel";
@@ -56,6 +57,7 @@ export default function SettingsPage() {
       <AccountPanel />
       <WorkspaceBoundaryPanel />
       <StorageStatusPanel />
+      <LocalSimulationStoragePanel />
       <ResetDemoDataPanel />
       <ReadinessReviewPanel
         review={MOCK_READINESS_REVIEW}

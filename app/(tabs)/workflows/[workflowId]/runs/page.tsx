@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { RunCard } from "@/components/runs/run-card";
+import { SavedSimulationHistory } from "@/components/simulation-replay/saved-simulation-history";
 import { MOCK_WORKFLOWS, MOCK_WORKFLOW_RUNS } from "@/lib/domain/mock-data";
-import { ROUTES, workflowDetailRoute } from "@/lib/navigation/routes";
+import { ROUTES, workflowDetailRoute, workflowRunCompareRoute, workflowRunReplayRoute } from "@/lib/navigation/routes";
 
 export const dynamicParams = false;
 
@@ -55,7 +56,18 @@ export default async function WorkflowRunHistoryPage({
             <RunCard key={run.id} run={run} />
           ))}
         </div>
+
+        <div className="workflow-builder__status">
+          <Link className="settings-link" href={workflowRunReplayRoute(workflow.id)}>
+            Open saved replay history
+          </Link>
+          <Link className="settings-link" href={workflowRunCompareRoute(workflow.id)}>
+            Open saved comparisons
+          </Link>
+        </div>
       </section>
+
+      <SavedSimulationHistory workflowId={workflow.id} />
     </main>
   );
 }

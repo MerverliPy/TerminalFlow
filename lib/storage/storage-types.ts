@@ -1,4 +1,7 @@
 import type {
+  SimulatedRunLifecycleStatus,
+  SimulatedRunLogEntry,
+  SimulatedRunStep,
   Project,
   TerminalSession,
   Workflow,
@@ -6,7 +9,7 @@ import type {
   WorkflowRunLogEntry,
 } from "@/lib/domain/types";
 
-export type LocalStoreVersion = 1;
+export type LocalStoreVersion = 2;
 
 export type LocalStoreCollection =
   | "projects"
@@ -15,10 +18,112 @@ export type LocalStoreCollection =
   | "workflowRuns"
   | "workflowRunLogs"
   | "simulatedCommandResults"
+  | "savedSimulationRuns"
+  | "simulationReplaySessions"
+  | "simulationComparisons"
+  | "simulationComparisonFindings"
   | "commandSimulationHistoryBySessionId"
   | "commandDraftBySessionId";
 
 export type LocalStoreStatus = "unavailable" | "empty" | "seeded" | "custom";
+export type SimulationSnapshotSource =
+  | "workflow-run"
+  | "simulator"
+  | "manual-save"
+  | "settings-restore";
+export type SimulationReplayStatus = "idle" | "ready" | "playing" | "paused" | "completed";
+export type SimulationComparisonStatus = "matched" | "diverged" | "reviewing";
+
+export interface SimulationReplayActionPreview {
+  id: string;
+  kind: "save" | "replay" | "compare" | "export" | "clear" | "restore";
+  label: string;
+  detail: string;
+  mode: "local-only" | "disabled";
+}
+
+export interface SimulationReplayFrame {
+  id: string;
+  order: number;
+  title: string;
+  detail: string;
+  status: SimulatedRunLifecycleStatus;
+  stepId?: string;
+  logId?: string;
+  progress: number;
+}
+
+export interface SimulationComparisonFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: "info" | "warn" | "blocked";
+  leftSnapshotId: string;
+  rightSnapshotId: string;
+  leftFrameId?: string;
+  rightFrameId?: string;
+}
+
+export interface SimulationComparison {
+  id: string;
+  leftSnapshotId: string;
+  rightSnapshotId: string;
+  title: string;
+  summary: string;
+  status: SimulationComparisonStatus;
+  createdAt: string;
+  updatedAt: string;
+  findingIds: string[];
+  note: string;
+}
+
+export interface SimulationReplaySession {
+  id: string;
+  snapshotId: string;
+  workflowId: string;
+  workflowName: string;
+  status: SimulationReplayStatus;
+  currentFrameIndex: number;
+  actionPreviews: SimulationReplayActionPreview[];
+  startedAt: string;
+  updatedAt: string;
+  note: string;
+}
+
+export interface SavedSimulationRun {
+  id: string;
+  workflowId: string;
+  workflowName: string;
+  originRunId?: string;
+  source: SimulationSnapshotSource;
+  capturedAt: string;
+  status: SimulatedRunLifecycleStatus;
+  summary: string;
+  note: string;
+}
+
+export interface PersistedSimulationRunSnapshot extends SavedSimulationRun {
+  trigger: string;
+  target: string;
+  targetDetail: string;
+  workspaceRoot: string;
+  duration: string;
+  steps: SimulatedRunStep[];
+  logs: SimulatedRunLogEntry[];
+  replayFrames: SimulationReplayFrame[];
+  comparisonIds: string[];
+  replaySessionId: string;
+}
+
+export interface LocalSimulationStorageStatus {
+  state: LocalStoreStatus;
+  snapshotCount: number;
+  replaySessionCount: number;
+  comparisonCount: number;
+  comparisonFindingCount: number;
+  lastUpdatedAt: string | null;
+  note: string;
+}
 
 export interface PersistedProject extends Project {}
 
@@ -70,6 +175,10 @@ export interface LocalStoreCollections {
   workflowRuns: PersistedWorkflowRun[];
   workflowRunLogs: PersistedWorkflowRunLogEntry[];
   simulatedCommandResults: PersistedSimulatedCommandResult[];
+  savedSimulationRuns: PersistedSimulationRunSnapshot[];
+  simulationReplaySessions: SimulationReplaySession[];
+  simulationComparisons: SimulationComparison[];
+  simulationComparisonFindings: SimulationComparisonFinding[];
   commandSimulationHistoryBySessionId: Record<string, PersistedSimulatedCommandResult[]>;
   commandDraftBySessionId: Record<string, string>;
 }

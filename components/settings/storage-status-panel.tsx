@@ -11,7 +11,7 @@ import type { LocalStoreSummary } from "@/lib/storage/storage-types";
 
 const INITIAL_SUMMARY: LocalStoreSummary = {
   status: "unavailable",
-  version: 1,
+  version: 2,
   updatedAt: null,
   counts: {
     projects: 0,
@@ -20,6 +20,10 @@ const INITIAL_SUMMARY: LocalStoreSummary = {
     workflowRuns: 0,
     workflowRunLogs: 0,
     simulatedCommandResults: 0,
+    savedSimulationRuns: 0,
+    simulationReplaySessions: 0,
+    simulationComparisons: 0,
+    simulationComparisonFindings: 0,
     commandSimulationHistoryBySessionId: 0,
     commandDraftBySessionId: 0,
   },
@@ -102,6 +106,21 @@ export function StorageStatusPanel() {
           <span className="settings-card__label">Workflow runs</span>
           <span className="settings-card__title">{summary.counts.workflowRuns}</span>
           <p className="card-copy">Persisted static run snapshots and logs.</p>
+        </article>
+        <article className="settings-card">
+          <span className="settings-card__label">Saved simulations</span>
+          <span className="settings-card__title">{summary.counts.savedSimulationRuns}</span>
+          <p className="card-copy">Saved replay snapshots for workflow history.</p>
+        </article>
+        <article className="settings-card">
+          <span className="settings-card__label">Replay sessions</span>
+          <span className="settings-card__title">{summary.counts.simulationReplaySessions}</span>
+          <p className="card-copy">Local replay state is stored with the snapshot set.</p>
+        </article>
+        <article className="settings-card">
+          <span className="settings-card__label">Comparison findings</span>
+          <span className="settings-card__title">{summary.counts.simulationComparisonFindings}</span>
+          <p className="card-copy">Finding cards are derived from saved comparison records.</p>
         </article>
         <article className="settings-card">
           <span className="settings-card__label">Command drafts</span>

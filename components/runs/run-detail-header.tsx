@@ -1,7 +1,12 @@
 import Link from "next/link";
 
 import type { WorkflowRun } from "@/lib/domain/types";
-import { workflowRunsRoute, workflowDetailRoute } from "@/lib/navigation/routes";
+import {
+  workflowDetailRoute,
+  workflowRunCompareRoute,
+  workflowRunReplayRoute,
+  workflowRunsRoute,
+} from "@/lib/navigation/routes";
 import { RunStatusBadge } from "@/components/runs/run-status-badge";
 
 const SAFETY_LABELS: Record<WorkflowRun["safetyState"], string> = {
@@ -42,6 +47,12 @@ export function RunDetailHeader({ run }: { run: WorkflowRun }) {
         <div className="workflow-builder__status">
           <Link className="settings-link" href={workflowDetailRoute(run.workflowId)}>
             Open workflow
+          </Link>
+          <Link className="settings-link" href={workflowRunReplayRoute(run.workflowId)}>
+            Open replay history
+          </Link>
+          <Link className="settings-link" href={workflowRunCompareRoute(run.workflowId)}>
+            Open comparisons
           </Link>
           <Link className="settings-link" href="#local-execution-simulator">
             Open simulator

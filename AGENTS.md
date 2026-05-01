@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 17: Local execution simulator and controlled run state UI.
+Phase 18: Local run persistence and simulation replay UI.
 
 ## Hard constraints
 
