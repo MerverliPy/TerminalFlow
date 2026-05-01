@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 04: Host connection setup and safety model UI.
+Phase 05: Static workflow builder and run preview UI.
 
 ## Hard constraints
 
