@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 11: Secrets vault UI and credential safety boundary.
+Phase 13: Local notification center and alert review UI.
 
 ## Hard constraints
 
