@@ -1,9 +1,6 @@
 import type { ReactNode } from "react";
 
-import { AuthWorkspaceBar } from "@/components/auth/auth-workspace-bar";
-import { MobileTabNav } from "@/components/shell/mobile-tab-nav";
-
-export default function TabsLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: ReactNode;
@@ -14,15 +11,13 @@ export default function TabsLayout({
         <header className="shell__bar">
           <div className="brand">
             <span className="brand__eyebrow">TerminalFlow</span>
-            <span className="brand__name">Mock workspace control plane</span>
+            <span className="brand__name">Local auth boundary</span>
           </div>
-          <AuthWorkspaceBar />
+          <div className="status">Mock sign-in only</div>
         </header>
 
         {children}
       </div>
-
-      <MobileTabNav />
     </div>
   );
 }

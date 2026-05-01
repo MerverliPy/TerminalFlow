@@ -1,6 +1,8 @@
 import Link from "next/link";
 
+import { AccountPanel } from "@/components/settings/account-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
+import { WorkspaceBoundaryPanel } from "@/components/settings/workspace-boundary-panel";
 import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel";
 import { StorageStatusPanel } from "@/components/settings/storage-status-panel";
 import { ROUTES } from "@/lib/navigation/routes";
@@ -37,12 +39,14 @@ export default function SettingsPage() {
     <main className="shell__panel">
       <section className="surface-heading">
         <span className="surface-heading__eyebrow">Settings</span>
-        <h1 className="surface-heading__title">Local storage and workspace settings</h1>
+        <h1 className="surface-heading__title">Local storage, account, and workspace settings</h1>
         <p className="surface-heading__copy">
-          Settings remain local and static. This surface explains the browser-only persistence model used by TerminalFlow in this phase.
+          Settings remain local and static. This surface explains the browser-only persistence model used by TerminalFlow in this phase and shows the mock account boundary.
         </p>
       </section>
 
+      <AccountPanel />
+      <WorkspaceBoundaryPanel />
       <StorageStatusPanel />
       <ResetDemoDataPanel />
       <LocalDataSafetyNote />

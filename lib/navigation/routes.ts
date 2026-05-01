@@ -1,5 +1,7 @@
 export const ROUTES = {
   root: "/",
+  signIn: "/sign-in",
+  workspace: "/workspace",
   hub: "/hub",
   projects: "/projects",
   sessions: "/sessions",

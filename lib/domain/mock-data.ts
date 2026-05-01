@@ -8,6 +8,73 @@ import type {
   WorkflowRun,
   Workflow,
 } from "@/lib/domain/types";
+import type { MockAuthSession, User, Workspace, WorkspaceMembership } from "@/lib/auth/auth-types";
+
+export const MOCK_USERS: User[] = [
+  {
+    id: "user-calvin",
+    profile: {
+      displayName: "Calvin Reed",
+      email: "calvin@terminalflow.local",
+      title: "Product engineer",
+      avatarLabel: "CR",
+    },
+  },
+];
+
+export const MOCK_WORKSPACES: Workspace[] = [
+  {
+    id: "workspace-terminalflow",
+    name: "TerminalFlow Core",
+    slug: "terminalflow-core",
+    summary: "Primary control plane workspace for local product work.",
+    root: "/home/calvin/projects/TerminalFlow",
+    boundaryNote: "Browser-local workspace boundary only.",
+  },
+  {
+    id: "workspace-labs",
+    name: "Labs Sandbox",
+    slug: "labs-sandbox",
+    summary: "Static sandbox for experimental surfaces and layout checks.",
+    root: "/home/calvin/projects/terminalflow-labs",
+    boundaryNote: "Used for mock membership and workspace selection only.",
+  },
+  {
+    id: "workspace-preview",
+    name: "Preview Review",
+    slug: "preview-review",
+    summary: "Read-only preview workspace for mobile UI validation.",
+    root: "/srv/workspaces/preview-review",
+    boundaryNote: "No backend session or remote execution is active.",
+  },
+];
+
+export const MOCK_WORKSPACE_MEMBERSHIPS: WorkspaceMembership[] = [
+  {
+    workspaceId: "workspace-terminalflow",
+    userId: "user-calvin",
+    role: "owner",
+    joinedAt: "3 months ago",
+  },
+  {
+    workspaceId: "workspace-labs",
+    userId: "user-calvin",
+    role: "admin",
+    joinedAt: "5 weeks ago",
+  },
+  {
+    workspaceId: "workspace-preview",
+    userId: "user-calvin",
+    role: "viewer",
+    joinedAt: "Today",
+  },
+];
+
+export const MOCK_AUTH_SESSION: MockAuthSession = {
+  userId: "user-calvin",
+  activeWorkspaceId: "workspace-terminalflow",
+  signedInAt: "Just now",
+};
 
 export const MOCK_HOST_CONNECTIONS: HostConnection[] = [
   {
