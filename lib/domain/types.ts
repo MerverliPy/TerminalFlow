@@ -7,6 +7,19 @@ export type HostEnvironment = "local" | "lab" | "remote";
 export type ConnectionMethod = "local profile" | "saved preset" | "manual setup";
 export type HostSafetyCheckState = "pass" | "warn" | "blocked";
 export type WorkflowState = "ready" | "draft" | "blocked";
+export type WorkflowRunStatus = "completed" | "running" | "paused" | "blocked" | "cancelled" | "failed";
+export type WorkflowRunStepKind = "check" | "command" | "decision" | "handoff";
+export type WorkflowRunStepStatus = "queued" | "running" | "completed" | "blocked" | "skipped" | "cancelled";
+export type WorkflowRunEventKind =
+  | "started"
+  | "step-started"
+  | "step-finished"
+  | "log"
+  | "interrupted"
+  | "cancelled"
+  | "completed";
+export type WorkflowRunLogLevel = "stdout" | "stderr" | "info" | "warn" | "error";
+export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
 
 export type ConnectionState = HostStatus;
 
@@ -74,4 +87,57 @@ export interface Workflow {
   state: WorkflowState;
   steps: string[];
   lastRunAt: string;
+}
+
+export interface WorkflowRun {
+  id: string;
+  workflowId: string;
+  workflowName: string;
+  projectId: string;
+  trigger: string;
+  target: string;
+  targetDetail: string;
+  workspaceRoot: string;
+  status: WorkflowRunStatus;
+  safetyState: WorkflowRunSafetyState;
+  startTime: string;
+  duration: string;
+  summary: string;
+  steps: WorkflowRunStep[];
+  timeline: WorkflowRunTimelineItem[];
+  logs: WorkflowRunLogEntry[];
+}
+
+export interface WorkflowRunStep {
+  id: string;
+  stepId: string;
+  title: string;
+  kind: WorkflowRunStepKind;
+  status: WorkflowRunStepStatus;
+  startedAt: string;
+  finishedAt: string;
+  duration: string;
+  detail: string;
+}
+
+export interface WorkflowRunEvent {
+  id: string;
+  kind: WorkflowRunEventKind;
+  time: string;
+  title: string;
+  detail: string;
+  stepId?: string;
+}
+
+export interface WorkflowRunTimelineItem extends WorkflowRunEvent {
+  index: number;
+}
+
+export interface WorkflowRunLogEntry {
+  id: string;
+  time: string;
+  level: WorkflowRunLogLevel;
+  stream: "stdout" | "stderr";
+  message: string;
+  stepId?: string;
 }
