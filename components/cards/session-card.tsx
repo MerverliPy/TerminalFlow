@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import type { TerminalSession } from "@/lib/domain/types";
+import { sessionDetailRoute } from "@/lib/navigation/routes";
 
 const SESSION_LABELS: Record<TerminalSession["state"], string> = {
   running: "Running",
@@ -8,7 +11,11 @@ const SESSION_LABELS: Record<TerminalSession["state"], string> = {
 
 export function SessionCard({ session }: { session: TerminalSession }) {
   return (
-    <article className="card">
+    <Link
+      href={sessionDetailRoute(session.id)}
+      className="card card--link"
+      aria-label={`Open session details for ${session.title}`}
+    >
       <div className="card__top">
         <div className="card-kv">
           <span className="card-kv__label">Session</span>
@@ -43,6 +50,6 @@ export function SessionCard({ session }: { session: TerminalSession }) {
         <span className="card-meta">Started {session.startedAt}</span>
         <span className="workspace-pill">Host: {session.hostId}</span>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -10,7 +10,8 @@ export default function SessionsPage() {
         <p className="surface-heading__copy">
           Sessions stay static in this phase. The cards model a control surface
           for terminal activity without creating a terminal runtime or any
-          WebSocket-backed execution path.
+          WebSocket-backed execution path. Tap a card to open the detail
+          surface.
         </p>
       </section>
 

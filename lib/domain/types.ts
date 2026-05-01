@@ -1,6 +1,8 @@
 export type ConnectionState = "connected" | "connecting" | "offline";
 export type ProjectHealth = "ready" | "attention";
-export type SessionState = "running" | "idle" | "paused";
+export type SessionStatus = "running" | "idle" | "paused";
+export type SessionState = SessionStatus;
+export type CommandStatus = "completed" | "queued" | "draft" | "blocked";
 export type WorkflowState = "ready" | "draft" | "blocked";
 
 export interface HostConnection {
@@ -30,11 +32,23 @@ export interface TerminalSession {
   title: string;
   projectId: string;
   hostId: string;
-  state: SessionState;
+  state: SessionStatus;
+  branch: string;
+  lastActivityAt: string;
   cwd: string;
   commandPreview: string;
   outputPreview: string;
   startedAt: string;
+}
+
+export interface CommandEntry {
+  id: string;
+  sessionId: string;
+  command: string;
+  status: CommandStatus;
+  timestamp: string;
+  cwd: string;
+  output: string;
 }
 
 export interface Workflow {

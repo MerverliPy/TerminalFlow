@@ -24,3 +24,8 @@ export const TAB_NAV_ITEMS = [
   { label: "Workflows", href: ROUTES.workflows },
   { label: "Settings", href: ROUTES.settings },
 ] as const;
+
+export const SESSION_DETAIL_ROUTE = "/sessions/[sessionId]";
+
+export const sessionDetailRoute = (sessionId: string) =>
+  `${ROUTES.sessions}/${sessionId}`;
