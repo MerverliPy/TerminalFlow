@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
+import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel";
+import { StorageStatusPanel } from "@/components/settings/storage-status-panel";
 import { ROUTES } from "@/lib/navigation/routes";
 
 const SETTINGS_GROUPS = [
@@ -34,12 +37,15 @@ export default function SettingsPage() {
     <main className="shell__panel">
       <section className="surface-heading">
         <span className="surface-heading__eyebrow">Settings</span>
-        <h1 className="surface-heading__title">Placeholder settings groups</h1>
+        <h1 className="surface-heading__title">Local storage and workspace settings</h1>
         <p className="surface-heading__copy">
-          Settings remain local and static. The layout exists so later phases
-          can expand it without changing the basic route structure.
+          Settings remain local and static. This surface explains the browser-only persistence model used by TerminalFlow in this phase.
         </p>
       </section>
+
+      <StorageStatusPanel />
+      <ResetDemoDataPanel />
+      <LocalDataSafetyNote />
 
       <section className="shell__section">
         <div className="settings-grid">
