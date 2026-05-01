@@ -6,6 +6,7 @@ import {
   ROUTES,
   workflowPlanRoute,
   workflowPreflightRoute,
+  workflowRunDetailRoute,
   workflowRunsRoute,
 } from "@/lib/navigation/routes";
 
@@ -58,6 +59,11 @@ export default async function WorkflowDetailPage({
           <Link className="settings-link" href={workflowRunsRoute(workflow.id)}>
             View run history
           </Link>
+          {latestRun ? (
+            <Link className="settings-link" href={workflowRunDetailRoute(workflow.id, latestRun.id)}>
+              Open simulator
+            </Link>
+          ) : null}
         </div>
       </section>
 

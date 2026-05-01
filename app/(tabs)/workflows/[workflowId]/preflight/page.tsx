@@ -10,12 +10,14 @@ import {
   MOCK_EXECUTION_PREFLIGHT_FINDINGS,
   MOCK_EXECUTION_PREFLIGHT_GATES,
   MOCK_EXECUTION_READINESS_SNAPSHOT,
+  MOCK_WORKFLOW_RUNS,
   MOCK_WORKFLOWS,
 } from "@/lib/domain/mock-data";
 import {
   ROUTES,
   workflowPlanRoute,
   workflowDetailRoute,
+  workflowRunDetailRoute,
   workflowRunsRoute,
 } from "@/lib/navigation/routes";
 
@@ -32,6 +34,7 @@ export default async function WorkflowPreflightPage({
 }) {
   const { workflowId } = await params;
   const workflow = MOCK_WORKFLOWS.find((item) => item.id === workflowId);
+  const run = MOCK_WORKFLOW_RUNS.find((item) => item.workflowId === workflowId);
 
   if (!workflow) {
     notFound();
@@ -58,6 +61,11 @@ export default async function WorkflowPreflightPage({
           <Link className="settings-link" href={workflowRunsRoute(workflow.id)}>
             View run history
           </Link>
+          {run ? (
+            <Link className="settings-link" href={workflowRunDetailRoute(workflow.id, run.id)}>
+              Open simulator
+            </Link>
+          ) : null}
         </div>
       </section>
 

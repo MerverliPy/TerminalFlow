@@ -41,6 +41,38 @@ export type WorkflowRunSafetyState = "safe" | "warning" | "blocked";
 export type CommandSimulationMode = "preset" | "manual";
 export type SimulatedCommandStatus = "completed" | "warning" | "blocked" | "failed";
 export type CommandSimulationSafetyCheckState = "allowlisted" | "warning" | "blocked";
+export type SimulatedRunLifecycleStatus =
+  | "idle"
+  | "running"
+  | "paused"
+  | "warning"
+  | "blocked"
+  | "failed"
+  | "cancelled"
+  | "completed";
+export type SimulatedRunStepStatus =
+  | "queued"
+  | "running"
+  | "completed"
+  | "blocked"
+  | "cancelled";
+export type SimulatedRunControlKind =
+  | "start"
+  | "pause"
+  | "resume"
+  | "cancel"
+  | "retry"
+  | "advance-step"
+  | "reset";
+export type SimulatedRunTransitionKind =
+  | "start"
+  | "pause"
+  | "resume"
+  | "cancel"
+  | "retry"
+  | "advance-step"
+  | "reset";
+export type SimulatedRunSafetyFindingSeverity = "info" | "warn" | "blocked";
 export type IntegrationConnectionStatus = "connected" | "reviewing" | "syncing" | "offline" | "blocked";
 export type IntegrationRiskLevel = "low" | "medium" | "high";
 export type IntegrationReviewFindingSeverity = "info" | "warn" | "blocked";
@@ -591,6 +623,83 @@ export interface WorkflowRunLogEntry {
   stream: "stdout" | "stderr";
   message: string;
   stepId?: string;
+}
+
+export interface SimulatedRunLogEntry {
+  id: string;
+  time: string;
+  level: WorkflowRunLogLevel;
+  stream: "stdout" | "stderr";
+  message: string;
+  stepId?: string;
+}
+
+export interface SimulatedRunStep {
+  id: string;
+  title: string;
+  kind: WorkflowRunStepKind;
+  status: SimulatedRunStepStatus;
+  progress: number;
+  startedAt: string;
+  finishedAt: string;
+  duration: string;
+  detail: string;
+}
+
+export interface SimulatedRunTransition {
+  id: string;
+  kind: SimulatedRunTransitionKind;
+  from: SimulatedRunLifecycleStatus;
+  to: SimulatedRunLifecycleStatus;
+  label: string;
+  detail: string;
+}
+
+export interface SimulatedRunControl {
+  id: string;
+  kind: SimulatedRunControlKind;
+  label: string;
+  detail: string;
+}
+
+export interface SimulatedRunSafetyFinding {
+  id: string;
+  title: string;
+  detail: string;
+  severity: SimulatedRunSafetyFindingSeverity;
+}
+
+export interface SimulatedRunScenario {
+  id: string;
+  title: string;
+  summary: string;
+  lifecycleStatus: SimulatedRunLifecycleStatus;
+  safetyState: WorkflowRunSafetyState;
+  blockedReason?: string;
+  note: string;
+  steps: SimulatedRunStep[];
+  logs: SimulatedRunLogEntry[];
+  transitions: SimulatedRunTransition[];
+  safetyFindings: SimulatedRunSafetyFinding[];
+}
+
+export interface LocalExecutionSimulator {
+  id: string;
+  title: string;
+  summary: string;
+  note: string;
+  controls: SimulatedRunControl[];
+  scenarios: SimulatedRunScenario[];
+}
+
+export interface SimulatedRunState {
+  scenarioId: string;
+  lifecycleStatus: SimulatedRunLifecycleStatus;
+  activeStepIndex: number;
+  lastAction: SimulatedRunControlKind | null;
+  steps: SimulatedRunStep[];
+  logs: SimulatedRunLogEntry[];
+  transitionHistory: SimulatedRunTransition[];
 }
 
 export interface CommandSimulationSafetyCheck {

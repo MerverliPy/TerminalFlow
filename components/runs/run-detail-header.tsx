@@ -43,6 +43,9 @@ export function RunDetailHeader({ run }: { run: WorkflowRun }) {
           <Link className="settings-link" href={workflowDetailRoute(run.workflowId)}>
             Open workflow
           </Link>
+          <Link className="settings-link" href="#local-execution-simulator">
+            Open simulator
+          </Link>
           <span className={`workspace-pill ${SAFETY_CLASSES[run.safetyState]}`}>
             Safety {SAFETY_LABELS[run.safetyState]}
           </span>

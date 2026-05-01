@@ -1149,6 +1149,129 @@ a {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.execution-simulator {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.execution-simulator__panel {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.execution-simulator__summary-grid,
+.execution-simulator__scenario-grid,
+.execution-simulator__layout,
+.execution-simulator__transition-grid,
+.execution-simulator__step-stack,
+.execution-simulator__transition-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.execution-simulator__summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.execution-simulator__scenario-grid {
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.execution-simulator__layout {
+  align-items: start;
+}
+
+.execution-simulator__control-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.execution-simulator__control-button {
+  display: grid;
+  justify-items: start;
+  gap: 0.2rem;
+}
+
+.execution-simulator__control-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.execution-simulator__control-detail {
+  color: rgba(229, 238, 252, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.execution-simulator__transition-grid {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.execution-simulator__transition,
+.execution-simulator__step {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(5, 8, 22, 0.72);
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.execution-simulator__scenario {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.execution-simulator__scenario--selected {
+  border-color: var(--border-strong);
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.18);
+}
+
+.execution-simulator__scenario-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.execution-simulator__progress-track {
+  position: relative;
+  overflow: hidden;
+  height: 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.84);
+}
+
+.execution-simulator__progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--good));
+}
+
+.execution-simulator__step-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+}
+
+.execution-simulator__log-stream {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.execution-simulator__safety-note {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: rgba(8, 13, 26, 0.9);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
 .nav-spacer {
   height: var(--dock-height);
 }
@@ -1262,6 +1385,10 @@ a {
 
   .run-actions {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .execution-simulator__layout {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   }
 
   .sim-result__outputs {
