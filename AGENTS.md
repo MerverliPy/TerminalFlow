@@ -19,7 +19,7 @@ Default loop:
 
 ## Current priority
 
-Phase 08: Persistence schema and local run store.
+Phase 09: Auth and user workspace boundary.
 
 ## Hard constraints
 
