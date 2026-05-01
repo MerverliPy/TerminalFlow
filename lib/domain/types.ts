@@ -133,6 +133,20 @@ export type ExecutionPlanActionKind =
   | "approve-dry-run";
 export type ExecutionPlanActionMode = "disabled" | "preview";
 export type ExecutionPlanMappingKind = "workflow" | "host" | "session" | "command";
+export type LocalReleaseStatus = "draft" | "reviewing" | "ready" | "published" | "blocked";
+export type LocalMilestoneStatus = "planned" | "in-progress" | "complete" | "deferred";
+export type LocalPhaseCompletionStatus = "complete" | "watch" | "blocked";
+export type LocalReleaseActionKind =
+  | "publish-release"
+  | "export-notes"
+  | "share-milestone"
+  | "create-github-release"
+  | "refresh-changelog"
+  | "deploy";
+export type LocalReleaseActionMode = "disabled" | "preview";
+export type LocalReleaseTimelineState = "recorded" | "reviewed" | "ready" | "blocked";
+export type LocalReleaseChangelogKind = "added" | "updated" | "fixed" | "reviewed";
+export type LocalReleaseRiskSeverity = "info" | "warn" | "blocked";
 
 export interface IntegrationProviderCategory {
   id: string;
@@ -535,6 +549,133 @@ export interface DryRunSummary {
   dependencySummary: string;
   findingIds: string[];
   actionPreviewIds: string[];
+  note: string;
+}
+
+export interface LocalReleaseNote {
+  id: string;
+  title: string;
+  version: string;
+  status: LocalReleaseStatus;
+  summary: string;
+  detail: string;
+  publishedAt: string;
+  updatedAt: string;
+  milestoneIds: string[];
+  phaseSummaryIds: string[];
+  groupedChangeSummaryIds: string[];
+  changelogEntryIds: string[];
+  readinessCheckIds: string[];
+  riskIds: string[];
+  actionPreviewIds: string[];
+  timelineItemIds: string[];
+  storageStatusId: string;
+  note: string;
+}
+
+export interface LocalReleaseMilestone {
+  id: string;
+  releaseId: string;
+  title: string;
+  summary: string;
+  status: LocalMilestoneStatus;
+  progress: number;
+  dueAt: string;
+  owner: string;
+  note: string;
+}
+
+export interface LocalPhaseCompletionSummary {
+  id: string;
+  releaseId: string;
+  phaseLabel: string;
+  title: string;
+  summary: string;
+  status: LocalPhaseCompletionStatus;
+  completedAt: string;
+  evidence: string;
+  note: string;
+}
+
+export interface LocalGroupedChangeSummaryItem {
+  id: string;
+  label: string;
+  count: number;
+  detail: string;
+}
+
+export interface LocalGroupedChangeSummary {
+  id: string;
+  releaseId: string;
+  title: string;
+  summary: string;
+  items: LocalGroupedChangeSummaryItem[];
+  note: string;
+}
+
+export interface LocalReleaseChangelogEntry {
+  id: string;
+  releaseId: string;
+  order: number;
+  time: string;
+  kind: LocalReleaseChangelogKind;
+  title: string;
+  detail: string;
+  note: string;
+}
+
+export interface LocalReleaseReadinessCheck {
+  id: string;
+  releaseId: string;
+  label: string;
+  detail: string;
+  status: ReadinessStatus;
+  evidence: string;
+  note: string;
+}
+
+export interface LocalReleaseRisk {
+  id: string;
+  releaseId: string;
+  title: string;
+  detail: string;
+  severity: LocalReleaseRiskSeverity;
+  mitigation: string;
+  note: string;
+}
+
+export interface LocalReleaseActionPreview {
+  id: string;
+  releaseId: string;
+  kind: LocalReleaseActionKind;
+  label: string;
+  detail: string;
+  mode: LocalReleaseActionMode;
+}
+
+export interface LocalReleaseTimelineItem {
+  id: string;
+  releaseId: string;
+  order: number;
+  time: string;
+  title: string;
+  detail: string;
+  state: LocalReleaseTimelineState;
+}
+
+export interface LocalReleaseStorageStatus {
+  id: string;
+  releaseId: string;
+  state: "local-static" | "browser-local";
+  releaseCount: number;
+  milestoneCount: number;
+  phaseCount: number;
+  groupedChangeCount: number;
+  changelogCount: number;
+  readinessCount: number;
+  riskCount: number;
+  timelineCount: number;
+  lastUpdatedAt: string;
   note: string;
 }
 

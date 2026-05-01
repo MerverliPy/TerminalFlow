@@ -657,6 +657,134 @@ a {
   gap: 0.4rem;
 }
 
+.release-dashboard,
+.release-detail {
+  gap: 0.9rem;
+}
+
+.release-hero {
+  border-radius: 1.35rem;
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  background:
+    linear-gradient(160deg, rgba(17, 14, 7, 0.96), rgba(8, 13, 26, 0.94)),
+    radial-gradient(circle at top right, rgba(251, 191, 36, 0.12), transparent 30%);
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.release-hero__copy,
+.release-hero__aside,
+.release-detail__header {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.release-hero__title {
+  margin: 0;
+  font-size: clamp(1.3rem, 4.2vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.release-hero__meta,
+.release-summary-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.release-card-grid,
+.release-milestone-grid,
+.release-phase-grid,
+.release-readiness-grid,
+.release-risk-grid,
+.release-action-details,
+.release-detail__grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.release-card-grid,
+.release-milestone-grid,
+.release-phase-grid,
+.release-readiness-grid,
+.release-risk-grid {
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.release-group-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(8.75rem, 1fr));
+}
+
+.release-action-grid {
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+
+.release-detail__grid,
+.release-action-details {
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.release-group-stack,
+.release-timeline {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.release-notes-card,
+.milestone-status-card,
+.release-timeline__item {
+  gap: 0.7rem;
+}
+
+.release-notes-card__meta {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.milestone-status-card__meter {
+  width: 100%;
+  height: 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(5, 8, 22, 0.82);
+  overflow: hidden;
+}
+
+.milestone-status-card__meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.85), rgba(56, 189, 248, 0.9));
+}
+
+.release-timeline__item {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 0.95rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.release-action-button:disabled {
+  opacity: 0.76;
+  cursor: not-allowed;
+}
+
+.release-safety-note {
+  border-radius: 1rem;
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  background: rgba(5, 8, 22, 0.84);
+  padding: 0.95rem 1rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
 .readiness-review-panel {
   display: grid;
   gap: 0.7rem;

@@ -5,6 +5,7 @@ import { AuditSummaryPanel } from "@/components/settings/audit-summary-panel";
 import { LocalDataSafetyNote } from "@/components/settings/local-data-safety-note";
 import { LocalSimulationStoragePanel } from "@/components/settings/local-simulation-storage-panel";
 import { NotificationPreferencesPanel } from "@/components/settings/notification-preferences-panel";
+import { ReleaseSummaryPanel } from "@/components/settings/release-summary-panel";
 import { ReadinessReviewPanel } from "@/components/settings/readiness-review-panel";
 import { WorkspaceBoundaryPanel } from "@/components/settings/workspace-boundary-panel";
 import { ResetDemoDataPanel } from "@/components/settings/reset-demo-data-panel";
@@ -13,6 +14,8 @@ import {
   MOCK_NOTIFICATION_PREFERENCE_PREVIEWS,
   MOCK_LOCAL_AUDIT_STORAGE_STATUS,
   MOCK_PROJECT_HEALTH_SUMMARY,
+  MOCK_RELEASE_NOTES,
+  MOCK_RELEASE_STORAGE_STATUS,
   MOCK_READINESS_REVIEW,
   MOCK_READINESS_SCORES,
 } from "@/lib/domain/mock-data";
@@ -66,6 +69,10 @@ export default function SettingsPage() {
         review={MOCK_READINESS_REVIEW}
         score={MOCK_READINESS_SCORES[0]}
         summary={MOCK_PROJECT_HEALTH_SUMMARY}
+      />
+      <ReleaseSummaryPanel
+        release={MOCK_RELEASE_NOTES[0]}
+        storageStatus={MOCK_RELEASE_STORAGE_STATUS}
       />
       <LocalDataSafetyNote />
 
