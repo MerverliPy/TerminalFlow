@@ -1,6 +1,6 @@
 # Phase 01 — Runnable Shell and Routing Foundation
 
-Status: pending
+Status: complete
 
 ## Goal
 
@@ -71,4 +71,6 @@ Use the first command that applies:
 
 ## Completion summary
 
-Pending.
+Validation command: `npm run typecheck`
+
+Validation result: passed.
